@@ -24,15 +24,17 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [
-              "src/styles.css"
-            ],
             "scripts": [],
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {
               "entry": "server.ts"
-            }
+            },
+            "styles": [
+              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.css"
+            ]
           },
           "configurations": {
             "production": {
@@ -89,6 +91,8 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -96,5 +100,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "3b47622d-137e-414f-853e-e5d7cdb6f13f"
   }
 }
