@@ -29,3 +29,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## To create a component
 
 Run `ng g c header --skip-tests` (`ng generate component header`)
+
+## To create a service
+
+Run `ng g s projects --skip-tests` (`ng generate service projects`)
