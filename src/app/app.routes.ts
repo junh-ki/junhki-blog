@@ -21,7 +21,7 @@ export const routes: Routes = [
     component: ContactComponent
   },
   {
-    path: '',
+    path: '**',
     redirectTo: 'home',
     pathMatch: 'full'
   }, // Default route
