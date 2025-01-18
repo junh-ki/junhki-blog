@@ -5,7 +5,13 @@ import { ResumeComponent } from './resume/resume.component';
 import { ContactComponent } from './contact/contact.component';
 
 export const routes: Routes = [
-  { path: 'home',
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full',
+  }, // Root path explicitly redirects to 'home'
+  {
+    path: 'home',
     component: HomeComponent
   },
   {

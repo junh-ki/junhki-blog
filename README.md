@@ -26,10 +26,17 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
-## To create a component
+## Create a component
+```bash
+ng g c header --skip-tests # (`ng generate component header`)
+```
 
-Run `ng g c header --skip-tests` (`ng generate component header`)
+## Create a service
+```bash
+ng g s projects --skip-tests # (`ng generate service projects`)
+```
 
-## To create a service
-
-Run `ng g s projects --skip-tests` (`ng generate service projects`)
+## Build the Angular application for GitHub Pages:
+```bash
+ng build --output-path docs --base-href /junhki-blog/
+```

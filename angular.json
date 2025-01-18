@@ -5,7 +5,6 @@
   "projects": {
     "junhki-blog": {
       "projectType": "application",
-      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -13,9 +12,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/junhki-blog",
+            "outputPath": "docs",  // Correct output path for GitHub Pages
+            "baseHref": "/junhki-blog/",
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            "main": "src/main.ts",  // Ensure this points to main.ts for regular browser rendering
             "polyfills": [
               "zone.js"
             ],
@@ -24,12 +24,6 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "server.ts"
-            },
             "styles": [
               "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
@@ -71,32 +65,6 @@
             }
           },
           "defaultConfiguration": "development"
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "buildTarget": "junhki-blog:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
-            "tsConfig": "tsconfig.spec.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css"
-            ],
-            "scripts": []
-          }
         }
       }
     }
