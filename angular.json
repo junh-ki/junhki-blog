@@ -10,12 +10,12 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "docs",  // Build directly to the docs folder
-            "baseHref": "/junhki-blog/",  // Set the correct base href for GitHub Pages
+            "outputPath": "docs",
+            "baseHref": "/junhki-blog/",
             "index": "src/index.html",
-            "browser": "src/main.ts",  // Correct property name (used to be "main")
+            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
