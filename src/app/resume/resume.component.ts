@@ -3,10 +3,8 @@ import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-resume',
-  standalone: true,
-  imports: [],
   templateUrl: './resume.component.html',
-  styleUrl: './resume.component.css'
+  styleUrls: ['./resume.component.css'],
 })
 export class ResumeComponent {
 

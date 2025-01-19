@@ -5,10 +5,8 @@ import { Project } from '../_models/Project';
 
 @Component({
   selector: 'app-home',
-  standalone: true,
-  imports: [],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
 

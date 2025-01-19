@@ -40,3 +40,6 @@ ng g s projects --skip-tests # (`ng generate service projects`)
 ```bash
 ng build --output-path docs --base-href /
 ```
+
+## Please refer to the NGX bootstrap documentation for more details
+https://valor-software.com/ngx-bootstrap/components
