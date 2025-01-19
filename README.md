@@ -38,5 +38,5 @@ ng g s projects --skip-tests # (`ng generate service projects`)
 
 ## Build the Angular application for GitHub Pages:
 ```bash
-ng build --output-path docs --base-href /junhki-blog/
+ng build --output-path docs --base-href /
 ```
