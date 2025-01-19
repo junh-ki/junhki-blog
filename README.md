@@ -46,10 +46,13 @@ https://valor-software.com/ngx-bootstrap/components
 
 ## TODO
 1. Favicon
-2. Footer (e.g., © Copyright 2025, Firstname Lastname Revision *githash*.)
-3. Blog Component (/w Date Timestamp)
-4. Article Component (/w Date Timestamp)
-5. Link Preview (a.k.a, Rich Preview): Thumbnail Image, Title, Description 
-5. OSM for Travel Blogs
-6. Comment feature (/w Dynamic Page Hydration powered by Go Backend)
-7. Spring Boot LLM Integration
+2. Header Theme (e.g., picture)
+3. Footer (e.g., © Copyright 2025, Firstname Lastname Revision *githash*. / Theme)
+4. Internationalization (i18n)
+5. Theme Switcher (Light or Dark)
+6. Blog Component (/w Date Timestamp)
+7. Article Component (/w Date Timestamp)
+8. Link Preview (a.k.a, Rich Preview): Thumbnail Image, Title, Description 
+9. OSM for Travel Blogs
+10. Comment feature (/w Dynamic Page Hydration powered by Go Backend)
+11. Spring Boot LLM Integration
