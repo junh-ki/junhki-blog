@@ -2,10 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>JunhkiBlog</title>
+  <title>Junhyung Ki</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script>
+    // Redirect only if not running on localhost
+    if (window.location.hostname !== 'localhost'
+      && window.location.pathname.startsWith('/junhki-blog/')) {
+      window.location.href = 'https://www.junhki.de';
+    }
+  </script>
 </head>
 <body>
   <app-root></app-root>
