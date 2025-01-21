@@ -15,7 +15,7 @@ export class PortfolioComponent implements OnInit {
   constructor(
     private readonly titleService: Title,
     private readonly projectService: ProjectService) {
-    this.titleService.setTitle('Junhyung Ki - Portfolio');
+    this.titleService.setTitle('Portfolio | JunhKi');
   }
 
   ngOnInit(): void {

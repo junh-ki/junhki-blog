@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   featuredProject = {} as Project;
 
   constructor(private readonly titleService: Title, private readonly projectService: ProjectService) {
-    this.titleService.setTitle('Junhyung Ki - Home');
+    this.titleService.setTitle('Home | JunhKi');
   }
 
   ngOnInit(): void {

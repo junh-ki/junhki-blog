@@ -9,6 +9,6 @@ import { Title } from '@angular/platform-browser';
 export class ResumeComponent {
 
   constructor(private readonly titleService: Title) {
-    this.titleService.setTitle('Junhyung Ki - Resume');
+    this.titleService.setTitle('Resume | JunhKi');
   }
 }
