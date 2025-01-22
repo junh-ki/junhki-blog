@@ -12,6 +12,8 @@ export class PortfolioComponent implements OnInit {
 
   projects = {} as Project[];
 
+  isCollapsed: boolean = true;
+
   constructor(
     private readonly titleService: Title,
     private readonly projectService: ProjectService) {
