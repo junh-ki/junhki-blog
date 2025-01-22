@@ -45,13 +45,13 @@ ng build --output-path docs --base-href /
 https://valor-software.com/ngx-bootstrap/components
 
 ## TODO
-1. Header Theme (e.g., picture)
-2. Footer (e.g., © Copyright 2025, Firstname Lastname Revision *githash*. / Theme)
-3. Internationalization (i18n)
-4. Theme Switcher (Light or Dark)
-5. Blog Component (/w Date Timestamp)
-6. Article Component (/w Date Timestamp)
-7. Link Preview (a.k.a, Rich Preview): Thumbnail Image, Title, Description 
+1. Link Preview (a.k.a, Rich Preview): Thumbnail Image, Title, Description 
+2. Blog Component (/w Date Timestamp)
+3. Article Component (/w Date Timestamp)
+4. Header Theme (e.g., picture)
+5. Footer (e.g., © Copyright 2025, Firstname Lastname Revision *githash*. / Theme)
+6. Internationalization (i18n)
+7. Theme Switcher (Light or Dark)
 8. OSM for Travel Blogs
-9.  Comment feature (/w Dynamic Page Hydration powered by Go Backend)
+9. Comment feature (/w Dynamic Page Hydration powered by Go Backend)
 10. Spring Boot LLM Integration
