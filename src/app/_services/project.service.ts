@@ -100,4 +100,15 @@ export default class ProjectService {
     }
     return project;
   }
+
+  getProjectsByFilter(filterTags: Tag[]) {
+    return this.projects.filter(project => {
+      for (const filterTag of filterTags) {
+        if (!project.tags.includes(filterTag)) {
+          return false;
+        }
+      }
+      return true;
+    });
+  }
 }
