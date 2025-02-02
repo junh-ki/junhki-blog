@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -34,6 +35,7 @@ import { ResumeComponent } from './resume/resume.component';
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     ModalModule.forRoot(),
+    AccordionModule.forRoot(),
     CarouselModule.forRoot(),
     CollapseModule.forRoot(),
     FormsModule,

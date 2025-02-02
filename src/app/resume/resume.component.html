@@ -1,1 +1,164 @@
-<p>resume works!</p>
+<div class="container text-center">
+  <button (click)="downloadResume()" class="btn btn-primary mb-5 shadow border">Download PDF Resume</button>
+  <div class="pb-2">
+    <accordion [isAnimated]="true" class="shadow">
+      <accordion-group [(isOpen)]="isWorkExperienceOpen">
+        <button class="btn btn-block justify-content-between d-flex w-100" accordion-heading>
+          <div style="visibility: hidden;">></div>
+          <div class="btn-link">Work Experience</div>
+          <div style="width: 10.95px;">
+            <div *ngIf="!isWorkExperienceOpen" style="color: white;">></div>
+            <div *ngIf="isWorkExperienceOpen" style="color: white;">v</div>
+          </div>
+        </button>
+        <div style="text-align: left;">
+          <h2 class="mb-0">Full Stack Developer</h2>
+          <h3 class="text-primary">HDI AG</h3>
+          <ul>
+            <li>Development of cloud-based and service-oriented solutions for international use in the industrial insurance business</li>
+            <li><a href="https://www.hdi.de">hdi.de</a></li>
+          </ul>
+        </div>
+        <hr>
+        <div style="text-align: left;">
+          <h2 class="mb-0">Backend Developer</h2>
+          <h3 class="text-primary">Holidu GmbH</h3>
+          <ul>
+            <li>Development of:
+              <ul>
+                <li>Search Engine Optimization (SEO) Content Management System (CMS) Tools</li>
+                <li>Backend APIs and Processes for Client Services</li>
+                <li>M&A Data Import API</li>
+                <li>GeoTools</li>
+              </ul>
+            </li>
+            <li><a href="https://www.holidu.com">holidu.com</a></li>
+          </ul>
+        </div>
+        <hr>
+        <div style="text-align: left;">
+          <h2 class="mb-0">Master's' Thesis Intern</h2>
+          <h3 class="text-primary">Robert Bosch GmbH</h3>
+          <ul>
+            <li>Development of:
+              <ul>
+                <li>Connected container ecosystem for the anti-tampering vehicle emission diagnostic system</li>
+                <li>Raspberry Pi-based in-vehicle CAN data acquisition and MQTT message transmitter for Bosch IoT-Hub</li>
+              </ul>
+            </li>
+            <li><a href="https://dias-kuksa-doc.readthedocs.io/en/latest/">Documentation Page</a></li>
+          </ul>
+        </div>
+        <hr>
+        <div style="text-align: left;">
+          <h2 class="mb-0">Research Assistant</h2>
+          <h3 class="text-primary">Fachhochschule Dortmund</h3>
+          <ul>
+            <li>Development of:
+              <ul>
+                <li>E2E Response Time Analyzer for Modern Automotive Heterogenous Systems</li>
+                <li>ECU Task Chain Latency Analyzer based on NVIDIA Jetson TX2 with Eclipse APP4MC</li>
+              </ul>
+            </li>
+            <li><a href="https://summerofcode.withgoogle.com/archive/2019/projects/6207209711599616">GSoC 2019 Contribution Page</a></li>
+          </ul>
+        </div>
+      </accordion-group>
+      <accordion-group [(isOpen)]="isEducationOpen">
+        <button class="btn btn-block justify-content-between d-flex w-100" accordion-heading>
+          <div style="visibility: hidden;">></div>
+          <div class="btn-link">Education</div>
+          <div style="width: 10.95px;">
+            <div *ngIf="!isEducationOpen" style="color: white;">></div>
+            <div *ngIf="isEducationOpen" style="color: white;">v</div>
+          </div>
+        </button>
+        <div style="text-align: left;">
+          <h2 class="mb-0">Master of Engineering in Embedded Systems for Mechatronics</h2>
+          <h3 class="text-primary">Dortmund University of Applied Sciences and Arts</h3>
+          <ul>
+            <li>Graduated from Dortmund University of Applied Sciences and Arts in 05.2021</li>
+            <li>CGPA 1,6 (German Scale)</li>
+          </ul>
+        </div>
+        <div style="text-align: left;">
+          <h2 class="mb-0">Bachelor of Science in Mechatronics Engineering</h2>
+          <h3 class="text-primary">Korea Polytechnic University</h3>
+          <ul>
+            <li>Graduated from Korea Polytechnic University in 02.2018</li>
+            <li>CGPA 3,53 (Korean Scale)</li>
+          </ul>
+        </div>
+      </accordion-group>
+      <accordion-group [(isOpen)]="isCertificationsOpen">
+        <button class="btn btn-block justify-content-between d-flex w-100" accordion-heading>
+          <div style="visibility: hidden;">></div>
+          <div class="btn-link">Certifications</div>
+          <div style="width: 10.95px;">
+            <div *ngIf="!isCertificationsOpen" style="color: white;">></div>
+            <div *ngIf="isCertificationsOpen" style="color: white;">v</div>
+          </div>
+        </button>
+        <div style="text-align: left;">
+          <h3>Goethe Certificate B1 (German)</h3>
+          <ul>
+            <li>Obtained in 12.2024</li>
+          </ul>
+          <button (click)="downloadCertificate()" class="btn btn-primary mb-5 shadow border">Download PDF Certificate</button>
+        </div>
+      </accordion-group>
+      <accordion-group [(isOpen)]="isSkillsOpen">
+        <button class="btn btn-block justify-content-between d-flex w-100" accordion-heading>
+          <div style="visibility: hidden;">></div>
+          <div class="btn-link">Skills</div>
+          <div style="width: 10.95px;">
+            <div *ngIf="!isSkillsOpen" style="color: white;">></div>
+            <div *ngIf="isSkillsOpen" style="color: white;">v</div>
+          </div>
+        </button>
+        <div class="row" style="text-align: left;">
+          <div class="col">
+            <h3>Programming Languages:</h3>
+            <ul>
+              <li>Java</li>
+              <li>Go</li>
+              <li>Python</li>
+              <li>TypeScript</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h3>Frameworks:</h3>
+            <ul>
+              <li>Spring Framework</li>
+              <li>Play Framework</li>
+              <li>Angular</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h3>DB/Caching:</h3>
+            <ul>
+              <li>JPA</li>
+              <li>SQL</li>
+              <li>NoSQL</li>
+              <li>PostgreSQL</li>
+              <li>Redis</li>
+              <li>Elasticsearch</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h3>DevOps:</h3>
+            <ul>
+              <li>Git</li>
+              <li>Jenkins</li>
+              <li>Docker</li>
+              <li>Kubernetes</li>
+              <li>AWS</li>
+              <li>Microsoft Azure</li>
+              <li>Clean Architecture</li>
+            </ul>
+          </div>
+        </div>
+      </accordion-group>
+    </accordion>
+  </div>
+</div>
