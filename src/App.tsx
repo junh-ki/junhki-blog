@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Nav from './components/Nav';
@@ -7,9 +8,27 @@ import HomePage from './pages/HomePage';
 import PortfolioPage from './pages/PortfolioPage';
 
 export default function App(): JSX.Element {
+  const [isDarkTheme, setIsDarkTheme] = useState<boolean>(true);
+
+  useEffect((): void => {
+    const persistedTheme: string | null = window.localStorage.getItem('theme');
+    if (persistedTheme === 'light') {
+      setIsDarkTheme(false);
+    }
+  }, []);
+
+  useEffect((): void => {
+    document.body.classList.toggle('light-theme', !isDarkTheme);
+    document.documentElement.style.colorScheme = isDarkTheme ? 'dark' : 'light';
+    window.localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
+  }, [isDarkTheme]);
+
   return (
     <div className="shadow-sm">
-      <Header />
+      <Header
+        isDarkTheme={isDarkTheme}
+        onToggleTheme={() => setIsDarkTheme((previousIsDarkTheme: boolean): boolean => !previousIsDarkTheme)}
+      />
       <Nav />
       <Routes>
         <Route path="/" element={<Navigate to="/home" replace />} />

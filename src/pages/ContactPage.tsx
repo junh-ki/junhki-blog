@@ -10,7 +10,7 @@ export default function ContactPage(): JSX.Element {
       <div className="contact-hero border rounded-3 p-4 p-md-5 shadow-sm mb-4">
         <h1 className="mb-3">Let&apos;s build something meaningful.</h1>
         <p className="lead mb-0 text-secondary">
-          I am open to software engineering opportunities, backend-focused roles, and product teams where reliability and quality matter.
+          I am open to software engineering opportunities, especially fullstack or backend roles, and product teams where reliability and quality matter.
         </p>
       </div>
       <div className="list-group shadow-sm rounded-3 overflow-hidden">

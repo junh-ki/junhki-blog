@@ -8,7 +8,7 @@ export default function Nav(): JSX.Element {
           <li className="nav-item">
             <NavLink
               to="/home"
-              className={({ isActive }): string => (isActive ? 'nav-link text-dark' : 'nav-link text-secondary')}
+              className={({ isActive }): string => (isActive ? 'nav-link nav-link-active' : 'nav-link nav-link-idle')}
             >
               Home
             </NavLink>
@@ -16,7 +16,7 @@ export default function Nav(): JSX.Element {
           <li className="nav-item">
             <NavLink
               to="/portfolio"
-              className={({ isActive }): string => (isActive ? 'nav-link text-dark' : 'nav-link text-secondary')}
+              className={({ isActive }): string => (isActive ? 'nav-link nav-link-active' : 'nav-link nav-link-idle')}
             >
               Portfolio
             </NavLink>
@@ -24,7 +24,7 @@ export default function Nav(): JSX.Element {
           <li className="nav-item">
             <NavLink
               to="/blog"
-              className={({ isActive }): string => (isActive ? 'nav-link text-dark' : 'nav-link text-secondary')}
+              className={({ isActive }): string => (isActive ? 'nav-link nav-link-active' : 'nav-link nav-link-idle')}
             >
               Blog
             </NavLink>
@@ -32,7 +32,7 @@ export default function Nav(): JSX.Element {
           <li className="nav-item">
             <NavLink
               to="/contact"
-              className={({ isActive }): string => (isActive ? 'nav-link text-dark' : 'nav-link text-secondary')}
+              className={({ isActive }): string => (isActive ? 'nav-link nav-link-active' : 'nav-link nav-link-idle')}
             >
               Contact
             </NavLink>
