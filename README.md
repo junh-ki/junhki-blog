@@ -12,7 +12,7 @@ The application will automatically reload if you change any source files.
 Run `npm run build` to build the project.
 The build artifacts will be written to `docs/` (the GitHub Pages deployment folder).
 
-Note: routing uses `HashRouter`, so client routes are under `#/home`, `#/portfolio`, `#/resume`, `#/contact`.
+Note: routing uses `HashRouter`, so client routes are under `#/home`, `#/portfolio`, `#/blog`, `#/contact`.
 
 ## TODO
 1. Link Preview (a.k.a, Rich Preview): Thumbnail Image, Title, Description 

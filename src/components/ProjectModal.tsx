@@ -19,13 +19,19 @@ export default function ProjectModal({ project, show, onHide }: ProjectModalProp
         <h2 style={{ margin: 0 }}>{project.name}</h2>
       </Modal.Header>
       <Modal.Body>
-        <Carousel interval={null}>
-          {project.pictures.map((picture: string, index: number) => (
-            <Carousel.Item key={`${picture}-${index}`}>
-              <img src={picture} alt="slide" style={{ display: 'block', width: '100%' }} />
-            </Carousel.Item>
-          ))}
-        </Carousel>
+        {project.pictures.length > 0 ? (
+          <Carousel interval={null}>
+            {project.pictures.map((picture: string, index: number) => (
+              <Carousel.Item key={`${picture}-${index}`}>
+                <img src={picture} alt="slide" style={{ display: 'block', width: '100%' }} />
+              </Carousel.Item>
+            ))}
+          </Carousel>
+        ) : (
+          <div className="p-4 border rounded-3 bg-light text-center text-secondary">
+            Visual assets are intentionally omitted for this placeholder case study.
+          </div>
+        )}
         <h3 className="mt-2">Description</h3>
         <p>{project.description}</p>
         <p>

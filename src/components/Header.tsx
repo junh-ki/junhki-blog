@@ -1,11 +1,13 @@
 export default function Header(): JSX.Element {
   return (
-    <div className="jumbotron" style={{ position: 'relative', padding: '2rem 1rem', backgroundColor: '#e9ecef' }}>
-      <div className="text-center">
-        <h1 className="display-4">Junhyung Ki</h1>
-        <h3>Software Developer</h3>
+    <div className="site-header">
+      <div className="container py-4 position-relative">
+        <div className="text-center">
+          <h1 className="display-5 fw-bold mb-1">Junhyung Ki</h1>
+          <p className="text-secondary mb-0">Software Engineer</p>
+        </div>
       </div>
-      <div style={{ position: 'absolute', bottom: 5, right: 10 }}>
+      <div className="social-links">
         <a href="https://www.linkedin.com/in/junh-ki" target="_blank" rel="noreferrer">
           <img src="assets/logo/linkedin.svg" width={24} height={24} className="rounded-circle me-2" alt="LinkedIn" />
         </a>

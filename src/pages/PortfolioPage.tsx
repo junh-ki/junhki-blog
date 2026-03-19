@@ -1,242 +1,113 @@
-import { useEffect, useMemo, useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Collapse from 'react-bootstrap/Collapse';
-import type { Project } from '../data/Project';
-import { Tag, type TagModel } from '../data/Tag';
-import { getProjects, getProjectsByFilter } from '../data/projectService';
-import ProjectCard from '../components/ProjectCard';
-import ProjectModal from '../components/ProjectModal';
+import { useEffect } from 'react';
 
 export default function PortfolioPage(): JSX.Element {
-  const allProjects: Project[] = useMemo((): Project[] => getProjects(), []);
-  const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
-  const [selectedTags, setSelectedTags] = useState<TagModel[]>([]);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-
   useEffect((): void => {
     document.title = 'Portfolio | JunhKi';
   }, []);
 
-  const projects: Project[] = useMemo((): Project[] => {
-    if (selectedTags.length === 0) {
-      return allProjects;
-    }
-    return getProjectsByFilter(selectedTags);
-  }, [allProjects, selectedTags]);
-
-  const toggleTag = (tag: TagModel): void => {
-    setSelectedTags((previousSelectedTags: TagModel[]): TagModel[] => {
-      if (previousSelectedTags.includes(tag)) {
-        return previousSelectedTags.filter((previousTag: TagModel): boolean => previousTag !== tag);
-      }
-      return [...previousSelectedTags, tag];
-    });
-  };
-
-  const resetFilters = (): void => {
-    setSelectedTags([]);
-  };
-
   return (
-    <div className="container">
-      <div className="mb-2">
-        <div>
-          <Button variant="outline-primary" className="mb-2 me-2" onClick={() => setIsCollapsed((previous: boolean): boolean => !previous)}>
-            Filter
-          </Button>
-          {!isCollapsed && (
-            <Button variant="outline-secondary" className="mb-2" onClick={resetFilters}>
-              Reset
-            </Button>
-          )}
+    <div className="container pb-4">
+      <section className="cv-section shadow-sm border rounded-3 p-4 p-md-5 mb-4">
+        <h2 className="mb-2">Professional Summary</h2>
+        <p className="text-secondary mb-0">
+          Software engineer with 5+ years of experience delivering backend and full-stack systems across insurance, travel, automotive, and startup environments. Strong focus on Java/Spring architecture, cloud-native operations, and long-term maintainability through clean engineering practices.
+        </p>
+      </section>
+
+      <section className="cv-section shadow-sm border rounded-3 p-4 p-md-5 mb-4">
+        <h3 className="mb-4">Experience</h3>
+        <div className="cv-timeline">
+          <article className="cv-timeline-item">
+            <div className="cv-timeline-meta">Sep 2025 - Present</div>
+            <h5 className="mb-1">Software Engineer - KoSyMa GmbH</h5>
+            <p className="text-secondary mb-0">Delivered backend/frontend features in a multi-service architecture, resolved complex cross-system issues, and strengthened engineering quality through code reviews and mentoring.</p>
+          </article>
+          <article className="cv-timeline-item">
+            <div className="cv-timeline-meta">Apr 2024 - Sep 2025</div>
+            <h5 className="mb-1">Java Fullstack Developer - HDI AG</h5>
+            <p className="text-secondary mb-0">Built global insurance platform features, led AI-assisted legacy document migration, and refactored DTO/data-access layers for scalability and maintainability.</p>
+          </article>
+          <article className="cv-timeline-item">
+            <div className="cv-timeline-meta">Jun 2021 - Apr 2024</div>
+            <h5 className="mb-1">Java Backend Developer - Holidu GmbH</h5>
+            <p className="text-secondary mb-0">Developed SEO platform features, async keyword/ads data pipelines, internal CMS tooling, and observability systems. Supported migration from monolith to microservices.</p>
+          </article>
+          <article className="cv-timeline-item">
+            <div className="cv-timeline-meta">Jul 2020 - May 2021</div>
+            <h5 className="mb-1">Master&apos;s Thesis Intern - Robert Bosch GmbH</h5>
+            <p className="text-secondary mb-0">Implemented an anti-tampering diagnostic PoC from CAN data capture to cloud visualization and contributed to an award-winning mobility paper.</p>
+          </article>
+          <article className="cv-timeline-item">
+            <div className="cv-timeline-meta">Mar 2019 - Mar 2020</div>
+            <h5 className="mb-1">Research Assistant - Fachhochschule Dortmund</h5>
+            <p className="text-secondary mb-0">Developed analysis tooling for real-time automotive systems, participated in Google Summer of Code 2019, and co-authored conference publications.</p>
+          </article>
         </div>
-        <Collapse in={!isCollapsed}>
-          <div className="border mb-2 shadow-sm" style={{ width: 250 }}>
-            <form>
-              <div className="row mx-0">
-                <div className="col">
-                  <small>
-                    <b>Languages:</b>
-                  </small>
-                  <div className="form-group">
-                    <div className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input position-static me-2"
-                        checked={selectedTags.includes(Tag.JAVASCRIPT)}
-                        onChange={() => toggleTag(Tag.JAVASCRIPT)}
-                        name="JavaScript"
-                      />
-                      <label className="form-check-label small">JavaScript</label>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <div className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input position-static me-2"
-                        checked={selectedTags.includes(Tag.TYPESCRIPT)}
-                        onChange={() => toggleTag(Tag.TYPESCRIPT)}
-                        name="TypeScript"
-                      />
-                      <label className="form-check-label small">TypeScript</label>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <div className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input position-static me-2"
-                        checked={selectedTags.includes(Tag.JAVA)}
-                        onChange={() => toggleTag(Tag.JAVA)}
-                        name="Java"
-                      />
-                      <label className="form-check-label small">Java</label>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <div className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input position-static me-2"
-                        checked={selectedTags.includes(Tag.GO)}
-                        onChange={() => toggleTag(Tag.GO)}
-                        name="Go"
-                      />
-                      <label className="form-check-label small">Go</label>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <div className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input position-static me-2"
-                        checked={selectedTags.includes(Tag.PYTHON)}
-                        onChange={() => toggleTag(Tag.PYTHON)}
-                        name="Python"
-                      />
-                      <label className="form-check-label small">Python</label>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <div className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input position-static me-2"
-                        checked={selectedTags.includes(Tag.NODEJS)}
-                        onChange={() => toggleTag(Tag.NODEJS)}
-                        name="NodeJS"
-                      />
-                      <label className="form-check-label small">NodeJS</label>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <div className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input position-static me-2"
-                        checked={selectedTags.includes(Tag.CSHARP)}
-                        onChange={() => toggleTag(Tag.CSHARP)}
-                        name="C#"
-                      />
-                      <label className="form-check-label small">C#</label>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <div className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input position-static me-2"
-                        checked={selectedTags.includes(Tag.ASPNET)}
-                        onChange={() => toggleTag(Tag.ASPNET)}
-                        name="ASP.NET"
-                      />
-                      <label className="form-check-label small">ASP.NET</label>
-                    </div>
-                  </div>
-                </div>
-                <div className="col">
-                  <small>
-                    <b>Frameworks:</b>
-                  </small>
-                  <div className="form-group">
-                    <div className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input position-static me-2"
-                        checked={selectedTags.includes(Tag.ANGULAR)}
-                        onChange={() => toggleTag(Tag.ANGULAR)}
-                        name="Angular"
-                      />
-                      <label className="form-check-label small">Angular</label>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <div className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input position-static me-2"
-                        checked={selectedTags.includes(Tag.REACT)}
-                        onChange={() => toggleTag(Tag.REACT)}
-                        name="React"
-                      />
-                      <label className="form-check-label small">React</label>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <div className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input position-static me-2"
-                        checked={selectedTags.includes(Tag.VUE)}
-                        onChange={() => toggleTag(Tag.VUE)}
-                        name="Vue"
-                      />
-                      <label className="form-check-label small">Vue</label>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <div className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input position-static me-2"
-                        checked={selectedTags.includes(Tag.SPRING)}
-                        onChange={() => toggleTag(Tag.SPRING)}
-                        name="Spring"
-                      />
-                      <label className="form-check-label small">Spring</label>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <div className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input position-static me-2"
-                        checked={selectedTags.includes(Tag.DJANGO)}
-                        onChange={() => toggleTag(Tag.DJANGO)}
-                        name="Django"
-                      />
-                      <label className="form-check-label small">Django</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
+      </section>
+
+      <section className="cv-section shadow-sm border rounded-3 p-4 p-md-5 mb-4">
+        <h3 className="mb-4">Core Skills</h3>
+        <div className="row g-3">
+          <div className="col-md-6 col-lg-3">
+            <div className="cv-skill-card">
+              <h6>Backend</h6>
+              <p className="text-secondary mb-0">Java, Spring Boot, Quarkus, Kafka, JobRunr, Maven/Gradle</p>
+            </div>
           </div>
-        </Collapse>
-      </div>
-      <div className="row">
-        {projects.map((project: Project) => (
-          <div
-            key={project.id}
-            className="col-lg-4 col-md-6 mb-4"
-            style={{ maxWidth: 380, minWidth: 380 }}
-          >
-            <ProjectCard project={project} onViewMore={() => setSelectedProject(project)} />
+          <div className="col-md-6 col-lg-3">
+            <div className="cv-skill-card">
+              <h6>Frontend</h6>
+              <p className="text-secondary mb-0">React, TypeScript, JavaScript, Angular/Nx, Playwright, Cypress</p>
+            </div>
           </div>
-        ))}
+          <div className="col-md-6 col-lg-3">
+            <div className="cv-skill-card">
+              <h6>Cloud and DevOps</h6>
+              <p className="text-secondary mb-0">AWS, Azure, Docker, Kubernetes, Helm, Jenkins, GitHub Actions, ArgoCD</p>
+            </div>
+          </div>
+          <div className="col-md-6 col-lg-3">
+            <div className="cv-skill-card">
+              <h6>Data and Observability</h6>
+              <p className="text-secondary mb-0">PostgreSQL, Redis, Elasticsearch, Grafana, Kibana, Logstash</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="row g-3">
+        <section className="col-lg-6">
+          <div className="cv-section shadow-sm border rounded-3 p-4 h-100">
+            <h4 className="mb-3">Education</h4>
+            <div className="mb-3">
+              <h6 className="mb-1">M.Eng in Embedded Systems</h6>
+              <p className="text-secondary mb-1">Fachhochschule Dortmund, Germany</p>
+              <small className="text-secondary">Oct 2018 - Apr 2021 | CGPA 1.6 (German scale)</small>
+            </div>
+            <div>
+              <h6 className="mb-1">B.Sc in Mechatronics Engineering</h6>
+              <p className="text-secondary mb-1">Korea Polytechnic University, South Korea</p>
+              <small className="text-secondary">Mar 2010 - Feb 2018 | CGPA 3.5 (Korean scale)</small>
+            </div>
+          </div>
+        </section>
+        <section className="col-lg-6">
+          <div className="cv-section shadow-sm border rounded-3 p-4 h-100">
+            <h4 className="mb-3">Publications and Honors</h4>
+            <ul className="mb-0 ps-3">
+              <li className="mb-2">
+                Eclipse KUKSA.val for SCR Anti-Tampering Monitoring in Heavy Vehicles (2021)
+              </li>
+              <li className="mb-2">
+                CPU-GPU Response Time and Mapping Analysis for High-Performance Automotive Systems (2019)
+              </li>
+              <li className="mb-0">
+                Best Paper Award - Eclipse Foundation SAAM Mobility (2021)
+              </li>
+            </ul>
+          </div>
+        </section>
       </div>
-      <ProjectModal project={selectedProject} show={selectedProject !== null} onHide={() => setSelectedProject(null)} />
     </div>
   );
 }

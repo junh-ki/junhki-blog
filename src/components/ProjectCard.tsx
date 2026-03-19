@@ -7,16 +7,16 @@ type ProjectCardProps = {
 
 export default function ProjectCard({ project, onViewMore }: ProjectCardProps): JSX.Element {
   return (
-    <div className="card shadow text-center" style={{ maxWidth: 350, minWidth: 350 }}>
+    <div className="card shadow-sm border-0 h-100 project-card">
       <div className="card-body">
-        <h5 className="card-title">{project.name}</h5>
-        <p className="card-text">{project.summary}</p>
-        <button className="btn btn-primary" onClick={onViewMore}>
-          View More
+        <h5 className="card-title mb-2">{project.name}</h5>
+        <p className="card-text text-secondary">{project.summary}</p>
+        <button className="btn btn-dark mt-2" onClick={onViewMore}>
+          View details
         </button>
       </div>
 
-      <div className="card-footer">
+      <div className="card-footer bg-white border-top-0 pb-3">
         <div className="d-flex flex-wrap justify-content-center">
           {project.tags.map((tag) => (
             <div key={tag.key} className="tag me-2 mb-1" style={{ backgroundColor: tag.color }}>

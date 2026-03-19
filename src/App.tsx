@@ -1,10 +1,10 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Nav from './components/Nav';
+import BlogPage from './pages/BlogPage';
 import ContactPage from './pages/ContactPage';
 import HomePage from './pages/HomePage';
 import PortfolioPage from './pages/PortfolioPage';
-import ResumePage from './pages/ResumePage';
 
 export default function App(): JSX.Element {
   return (
@@ -15,7 +15,7 @@ export default function App(): JSX.Element {
         <Route path="/" element={<Navigate to="/home" replace />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/portfolio" element={<PortfolioPage />} />
-        <Route path="/resume" element={<ResumePage />} />
+        <Route path="/blog" element={<BlogPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="*" element={<Navigate to="/home" replace />} />
       </Routes>

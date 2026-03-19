@@ -23,10 +23,10 @@ export default function Nav(): JSX.Element {
           </li>
           <li className="nav-item">
             <NavLink
-              to="/resume"
+              to="/blog"
               className={({ isActive }): string => (isActive ? 'nav-link text-dark' : 'nav-link text-secondary')}
             >
-              Resume
+              Blog
             </NavLink>
           </li>
           <li className="nav-item">
