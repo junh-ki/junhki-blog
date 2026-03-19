@@ -13,3 +13,17 @@
   background-color: blue;
   color: white;
 }
+
+.jumbotron {
+  padding: 2rem 1rem;
+  background-color: #e9ecef;
+}
+
+.resume-accordion .btn-link {
+  color: white;
+}
+
+.resume-accordion .card-header, .resume-accordion .accordion-button {
+  background-color: #007bff;
+  color: white;
+}
