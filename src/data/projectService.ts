@@ -54,12 +54,12 @@ const projects: Project[] = [
   },
   {
     id: 5,
-    name: 'Multi-service Product Delivery and Mentoring (KoSyMa)',
+    name: 'Specification-compliant Multi-tenant Platform',
     pictures: [],
     projectLink: 'https://www.linkedin.com/in/junh-ki/',
-    summary: 'Delivered backend/frontend features in a startup multi-service architecture with strong production reliability focus.',
+    summary: 'Quarkus + jOOQ/PostgreSQL backend, React/TypeScript clients, and Playwright-driven Gematik specification testing.',
     description:
-      'Worked across service boundaries to resolve integration issues and improve robustness. Also helped raise engineering standards via structured code reviews and mentoring in a high-ownership startup environment.',
+      'Migrated persistence from an AWS S3-backed single-tenancy Lambda setup to PostgreSQL with jOOQ and Flyway migrations, enabling cost-efficient multi-tenancy. Built and enhanced backend services, web clients for user and administration flows, organization onboarding, and an end-to-end test runner integrating the Gematik specification suite. Increased delivery velocity through reusable local debug/test automation tools and continuous mentoring plus weekly engineering talks.',
     tags: [Tag.JAVA, Tag.REACT, Tag.TYPESCRIPT]
   }
 ];

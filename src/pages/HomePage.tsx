@@ -10,7 +10,7 @@ export default function HomePage(): JSX.Element {
     document.title = 'Home | JunhKi';
   }, []);
 
-  const featuredProject: Project = useMemo((): Project => getProjectById(0), []);
+  const featuredProject: Project = useMemo((): Project => getProjectById(5), []);
 
   return (
     <div className="container pb-4">
@@ -19,7 +19,7 @@ export default function HomePage(): JSX.Element {
           <div className="col-lg-8 p-4 p-lg-5">
             <h2 className="display-6 fw-semibold mb-3">Building reliable backend systems and modern web experiences</h2>
             <p className="lead text-secondary mb-4">
-              I am a software engineer with 5+ years of experience across insurance, travel, automotive, and startup domains. I focus on scalable Java backend systems, cloud-native architecture, and pragmatic frontend delivery with React and TypeScript.
+              I am a software engineer with 5+ years of experience across insurance, travel, automotive, and startup domains. I focus on scalable Java backend systems (Quarkus and Spring Boot) with multi-tenant cloud-native architecture, and pragmatic frontend delivery with React and TypeScript. Recently I delivered Matrix/Gematik compliant multi-tenant services, including PostgreSQL + jOOQ persistence and Playwright-based specification testing.
             </p>
             <div className="d-flex gap-2 flex-wrap">
               <Link to="/portfolio" className="btn btn-dark">
@@ -40,19 +40,19 @@ export default function HomePage(): JSX.Element {
         <div className="col-md-4">
           <div className="p-3 border rounded-3 h-100 bg-white shadow-sm">
             <h5 className="mb-2">Backend Engineering</h5>
-            <p className="mb-0 text-secondary">Java, Spring Boot, APIs, service design, and production-focused backend development.</p>
+              <p className="mb-0 text-secondary">Java backend systems (Spring Boot and Quarkus), APIs, service design, and production-focused backend development with jOOQ/PostgreSQL.</p>
           </div>
         </div>
         <div className="col-md-4">
           <div className="p-3 border rounded-3 h-100 bg-white shadow-sm">
             <h5 className="mb-2">Cloud and DevOps</h5>
-            <p className="mb-0 text-secondary">Docker, Kubernetes, CI/CD, and cloud-native workflows for scalable systems.</p>
+            <p className="mb-0 text-secondary">Docker, Kubernetes, AWS CDK, CI/CD, and cloud-native workflows for scalable systems.</p>
           </div>
         </div>
         <div className="col-md-4">
           <div className="p-3 border rounded-3 h-100 bg-white shadow-sm">
             <h5 className="mb-2">Frontend Delivery</h5>
-            <p className="mb-0 text-secondary">React + TypeScript interfaces that are maintainable, fast, and user-friendly.</p>
+            <p className="mb-0 text-secondary">React + TypeScript interfaces, with Playwright/Cypress for reliable UI and integration testing.</p>
           </div>
         </div>
       </div>

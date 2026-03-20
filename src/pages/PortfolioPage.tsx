@@ -10,7 +10,7 @@ export default function PortfolioPage(): JSX.Element {
       <section className="cv-section shadow-sm border rounded-3 p-4 p-md-5 mb-4">
         <h2 className="mb-2">Professional Summary</h2>
         <p className="text-secondary mb-0">
-          Software engineer with 5+ years of experience delivering backend and full-stack systems across insurance, travel, automotive, and startup environments. Strong focus on Java/Spring architecture, cloud-native operations, and long-term maintainability through clean engineering practices.
+          Software engineer with 5+ years of experience delivering backend and full-stack systems across insurance, travel, automotive, and startup environments. Strong focus on Java backend systems (Quarkus and Spring Boot), multi-tenant cloud-native architecture, and long-term maintainability through clean engineering practices. Experienced with PostgreSQL/jOOQ data access and React/TypeScript frontend delivery.
         </p>
       </section>
 
@@ -20,17 +20,17 @@ export default function PortfolioPage(): JSX.Element {
           <article className="cv-timeline-item">
             <div className="cv-timeline-meta">Sep 2025 - Present</div>
             <h5 className="mb-1">Software Engineer - KoSyMa GmbH</h5>
-            <p className="text-secondary mb-0">Delivered backend/frontend features in a multi-service architecture, resolved complex cross-system issues, and strengthened engineering quality through code reviews and mentoring.</p>
+            <p className="text-secondary mb-0">Delivered a multi-tenant backend/frontend suite with Matrix + Gematik specification compliance using Quarkus. Migrated S3-backed single-tenancy persistence to PostgreSQL with jOOQ/Flyway, improved Docker/Kubernetes deployments, built React/TypeScript web clients for user and administration flows, and strengthened reliability with Playwright-driven verification using the Gematik specification test suite and a custom test driver. Mentored developers and improved delivery velocity with local debug/test automation tools and weekly engineering talks.</p>
           </article>
           <article className="cv-timeline-item">
             <div className="cv-timeline-meta">Apr 2024 - Sep 2025</div>
             <h5 className="mb-1">Java Fullstack Developer - HDI AG</h5>
-            <p className="text-secondary mb-0">Built global insurance platform features, led AI-assisted legacy document migration, and refactored DTO/data-access layers for scalability and maintainability.</p>
+            <p className="text-secondary mb-0">Built global insurance platform features with Spring Boot, led AI-assisted legacy document migration, and refactored DTO/data-access layers for scalability and maintainability.</p>
           </article>
           <article className="cv-timeline-item">
             <div className="cv-timeline-meta">Jun 2021 - Apr 2024</div>
             <h5 className="mb-1">Java Backend Developer - Holidu GmbH</h5>
-            <p className="text-secondary mb-0">Developed SEO platform features, async keyword/ads data pipelines, internal CMS tooling, and observability systems. Supported migration from monolith to microservices.</p>
+            <p className="text-secondary mb-0">Developed SEO platform features with Spring Boot, async keyword/ads data pipelines, internal CMS tooling, and observability systems. Supported migration from monolith to microservices.</p>
           </article>
           <article className="cv-timeline-item">
             <div className="cv-timeline-meta">Jul 2020 - May 2021</div>
@@ -51,7 +51,7 @@ export default function PortfolioPage(): JSX.Element {
           <div className="col-md-6 col-lg-3">
             <div className="cv-skill-card">
               <h6>Backend</h6>
-              <p className="text-secondary mb-0">Java, Spring Boot, Quarkus, Kafka, JobRunr, Maven/Gradle</p>
+              <p className="text-secondary mb-0">Java, Spring Boot, Quarkus, jOOQ, Flyway, Kafka, JobRunr, Maven/Gradle</p>
             </div>
           </div>
           <div className="col-md-6 col-lg-3">
@@ -63,7 +63,7 @@ export default function PortfolioPage(): JSX.Element {
           <div className="col-md-6 col-lg-3">
             <div className="cv-skill-card">
               <h6>Cloud and DevOps</h6>
-              <p className="text-secondary mb-0">AWS, Azure, Docker, Kubernetes, Helm, Jenkins, GitHub Actions, ArgoCD</p>
+              <p className="text-secondary mb-0">AWS, AWS CDK, Azure, Docker, Kubernetes, Helm, Jenkins, GitHub Actions, ArgoCD</p>
             </div>
           </div>
           <div className="col-md-6 col-lg-3">
