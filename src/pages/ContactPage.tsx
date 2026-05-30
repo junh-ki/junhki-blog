@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { JSX, useEffect } from 'react';
 
 export default function ContactPage(): JSX.Element {
   useEffect((): void => {
@@ -20,7 +20,7 @@ export default function ContactPage(): JSX.Element {
           rel="noreferrer"
           className="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3"
         >
-          <img src="assets/logo/linkedin.svg" width={32} height={32} className="rounded-circle flex-shrink-0 me-5" alt="LinkedIn" />
+          <img src="/assets/logo/linkedin.svg" width={32} height={32} className="rounded-circle flex-shrink-0 me-5" alt="LinkedIn" />
           <div>
             <h5 className="mb-0">LinkedIn</h5>
             <small className="text-secondary">Professional background and career updates</small>
@@ -32,7 +32,7 @@ export default function ContactPage(): JSX.Element {
           rel="noreferrer"
           className="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3"
         >
-          <img src="assets/logo/github.svg" width={32} height={32} className="rounded-circle flex-shrink-0 me-5" alt="GitHub" />
+          <img src="/assets/logo/github.svg" width={32} height={32} className="rounded-circle flex-shrink-0 me-5" alt="GitHub" />
           <div>
             <h5 className="mb-0">GitHub</h5>
             <small className="text-secondary">Code samples and project repositories</small>
@@ -44,7 +44,7 @@ export default function ContactPage(): JSX.Element {
           rel="noreferrer"
           className="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3"
         >
-          <img src="assets/logo/gravatar.svg" width={32} height={32} className="rounded-circle flex-shrink-0 me-5" alt="Gravatar" />
+          <img src="/assets/logo/gravatar.svg" width={32} height={32} className="rounded-circle flex-shrink-0 me-5" alt="Gravatar" />
           <div>
             <h5 className="mb-0">Gravatar</h5>
             <small className="text-secondary">Public profile and identity references</small>

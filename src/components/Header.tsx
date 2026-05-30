@@ -1,3 +1,5 @@
+import { JSX } from "react";
+
 type HeaderProps = {
   isDarkTheme: boolean;
   onToggleTheme: () => void;
@@ -17,13 +19,13 @@ export default function Header({ isDarkTheme, onToggleTheme }: HeaderProps): JSX
           {isDarkTheme ? 'Light' : 'Dark'}
         </button>
         <a href="https://www.linkedin.com/in/junh-ki" target="_blank" rel="noreferrer">
-          <img src="assets/logo/linkedin.svg" width={24} height={24} className="rounded-circle me-2" alt="LinkedIn" />
+          <img src="/assets/logo/linkedin.svg" width={24} height={24} className="rounded-circle me-2" alt="LinkedIn" />
         </a>
         <a href="https://github.com/junh-ki" target="_blank" rel="noreferrer">
-          <img src="assets/logo/github.svg" width={24} height={24} className="rounded-circle me-2" alt="GitHub" />
+          <img src="/assets/logo/github.svg" width={24} height={24} className="rounded-circle me-2" alt="GitHub" />
         </a>
         <a href="https://gravatar.com/junhki" target="_blank" rel="noreferrer">
-          <img src="assets/logo/gravatar.svg" width={24} height={24} className="rounded-circle me-2" alt="Gravatar" />
+          <img src="/assets/logo/gravatar.svg" width={24} height={24} className="rounded-circle me-2" alt="Gravatar" />
         </a>
       </div>
     </div>
