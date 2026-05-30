@@ -1,6 +1,8 @@
 export type LabSection = {
   heading: string;
   body: string;
+  imageUrl?: string;
+  imageAlt?: string;
 };
 
 export type LabPost = {
@@ -11,6 +13,8 @@ export type LabPost = {
   excerpt: string;
   tags: string[];
   githubUrl: string;
+  cardImageUrl?: string;
+  cardImageAlt?: string;
   docUrl?: string;
   pubUrl?: string;
   content: {
@@ -29,6 +33,8 @@ export const labPosts: LabPost[] = [
       'Building a stock order API where every accepted order is guaranteed to eventually reach the exchange, without coupling endpoint reliability to exchange availability.',
     tags: ['Python', 'FastAPI', 'PostgreSQL', 'Redis', 'Docker', 'SQLAlchemy', 'Alembic', 'Pydantic', 'pytest'],
     githubUrl: 'https://github.com/junh-ki/stock-orders-api',
+    cardImageUrl: 'assets/projects/stock-orders-arch.png',
+    cardImageAlt: 'Stock Orders API architecture diagram',
     content: {
       intro:
         'I built this project to explore the Transactional Outbox Pattern end-to-end. The scenario is a stock order API that must guarantee every accepted order eventually reaches an external exchange, even under exchange failures, while keeping the POST /orders endpoint fast and isolated from exchange latency. The stack is Python 3.13 and FastAPI, backed by PostgreSQL and Redis.',
@@ -40,6 +46,8 @@ export const labPosts: LabPost[] = [
         {
           heading: 'Transactional Outbox Pattern',
           body: 'The solution works in three steps. First, the order and a pending exchange_placement record are written atomically in a single PostgreSQL transaction, then 201 is returned. Second, a background consumer pops order IDs from a Redis sorted-set queue and calls place_order with tenacity retries (up to 3 attempts, exponential backoff, 1s/2s). Third, a recovery job runs every 15 seconds and re-enqueues any orders that are persisted in the database but absent from Redis, closing the crash window between COMMIT and ZADD.\n\nAs long as the database write succeeds, the order will eventually reach the exchange. The endpoint itself only fails if PostgreSQL is down.',
+          imageUrl: 'assets/projects/stock-orders-arch.png',
+          imageAlt: 'Stock Orders API architecture diagram',
         },
         {
           heading: 'Idempotency Design',
@@ -97,6 +105,8 @@ export const labPosts: LabPost[] = [
       'A hands-on playground for Spring AI: wiring up chat memory, RAG pipelines, tool-using agents, and full LLM observability with Langfuse tracing.',
     tags: ['Java', 'Spring Boot', 'Spring AI', 'Langfuse', 'Docker', 'Ollama', 'OpenTelemetry', 'Redis'],
     githubUrl: 'https://github.com/junh-ki/spring-ai-lab',
+    cardImageUrl: 'assets/projects/spring-ai-arch.png',
+    cardImageAlt: 'Spring AI platform architecture overview',
     content: {
       intro:
         'I built this playground to move beyond reading the Spring AI docs and actually wire things up end-to-end: chat with conversation memory, RAG over PDF documents, a tool-using agent, and full LLM observability via Langfuse. The project runs entirely locally with Ollama and can switch to OpenAI or AWS Bedrock via Maven profiles without touching application code.',
@@ -108,6 +118,8 @@ export const labPosts: LabPost[] = [
         {
           heading: 'LLM Observability with Langfuse',
           body: 'The Spring app emits OTLP spans via the Spring AI observation layer → Micrometer → OpenTelemetry SDK → BatchSpanProcessor, delivered over HTTP to a local Langfuse stack. Langfuse captures every model call (prompts, completions, tool invocations, retrievals, token counts, latencies) and surfaces them in a structured trace UI.\n\nThe full stack (Langfuse web and worker, PostgreSQL for metadata and prompts, ClickHouse for high-volume event data, MinIO for raw blobs, Redis as a queue) runs as a separate Docker Compose project. Keeping it isolated means trace data and project keys survive application restarts. This gave me a real sense of what production LLM observability looks like: not just log lines, but hierarchical spans grouped by conversation session.',
+          imageUrl: 'assets/projects/spring-ai-arch.png',
+          imageAlt: 'Spring AI platform architecture overview',
         },
         {
           heading: 'Provider Flexibility',
@@ -129,6 +141,8 @@ export const labPosts: LabPost[] = [
       'An end-to-end system connecting in-vehicle CAN bus data to cloud-based visualization for NOx emission diagnostics, published at Eclipse Foundation SAAM Mobility 2021.',
     tags: ['Python', 'Java', 'Docker', 'Eclipse KUKSA', 'InfluxDB', 'Grafana', 'CAN bus', 'IoT'],
     githubUrl: 'https://github.com/junh-ki/dias_kuksa',
+    cardImageUrl: 'assets/projects/dias-kuksa-arch.png',
+    cardImageAlt: 'DIAS-KUKSA vehicle-to-cloud connectivity diagram',
     docUrl: 'https://dias-kuksa-doc.readthedocs.io/en/latest/',
     pubUrl: 'https://ceur-ws.org/Vol-3028/D2-02-ESAAMM_2021_paper_3.pdf',
     content: {
@@ -142,6 +156,8 @@ export const labPosts: LabPost[] = [
         {
           heading: 'Architecture: In-Vehicle to Cloud',
           body: 'The system has two tiers. In-vehicle: Eclipse KUKSA.val acts as the vehicle data broker. A J1939/DBC feeder parses raw CAN frames and publishes the decoded signals to KUKSA.val. A cloud feeder component then streams those signals to the cloud tier over MQTT/WebSocket.\n\nCloud tier: a Hono telemetry receiver collects the incoming vehicle signals, stores time-series data in InfluxDB, and exposes real-time anti-tampering dashboards via Grafana. The entire cloud stack runs containerised via Docker Compose for local development.\n\nA canplayer utility provides Python scripts to modify and replay recorded CAN trace log files, enabling development and testing without a physical vehicle on hand.',
+          imageUrl: 'assets/projects/dias-kuksa-arch.png',
+          imageAlt: 'DIAS-KUKSA vehicle-to-cloud connectivity diagram',
         },
         {
           heading: 'Research Outcome',

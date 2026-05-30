@@ -55,6 +55,16 @@ export default function LabPostPage(): JSX.Element {
           <div key={section.heading} className="mb-4">
             <h5 className="mb-2">{section.heading}</h5>
             <SectionBody body={section.body} />
+            {section.imageUrl && (
+              <div className="mt-3">
+                <img
+                  src={section.imageUrl}
+                  alt={section.imageAlt ?? section.heading}
+                  className="img-fluid rounded-3 border shadow-sm"
+                  style={{ maxWidth: '100%' }}
+                />
+              </div>
+            )}
           </div>
         ))}
 

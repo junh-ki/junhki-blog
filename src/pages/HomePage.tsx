@@ -67,17 +67,37 @@ export default function HomePage(): JSX.Element {
         <div className="row g-3">
           {labPosts.slice(0, 2).map((post: LabPost) => (
             <div key={post.slug} className="col-md-6">
-              <article className="blog-card p-3 border rounded-3 h-100 d-flex flex-column">
-                <small className="text-secondary d-block mb-2">
-                  {new Date(post.publishedAt).toLocaleDateString()} · {post.readTime}
-                </small>
-                <h5 className="mb-2">{post.title}</h5>
-                <p className="text-secondary mb-3 flex-grow-1">{post.excerpt}</p>
-                <TagList tags={post.tags} />
-                <div className="mt-3">
-                  <Link to={`/lab/${post.slug}`} className="btn btn-outline-dark btn-sm">
-                    Read post
-                  </Link>
+              <article className="blog-card border rounded-3 h-100 d-flex flex-column overflow-hidden">
+                {post.cardImageUrl ? (
+                  <div style={{ height: '140px', overflow: 'hidden', background: '#f8f9fa' }}>
+                    <img
+                      src={post.cardImageUrl}
+                      alt={post.cardImageAlt ?? post.title}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
+                    />
+                  </div>
+                ) : (
+                  <div
+                    className="d-flex align-items-center justify-content-center"
+                    style={{ height: '140px', background: 'linear-gradient(135deg, #212529 0%, #343a40 100%)' }}
+                  >
+                    <span style={{ color: 'rgba(255,255,255,0.15)', fontSize: '2.5rem', fontFamily: 'monospace' }}>
+                      {'</>'}
+                    </span>
+                  </div>
+                )}
+                <div className="p-3 d-flex flex-column flex-grow-1">
+                  <small className="text-secondary d-block mb-2">
+                    {new Date(post.publishedAt).toLocaleDateString()} · {post.readTime}
+                  </small>
+                  <h5 className="mb-2">{post.title}</h5>
+                  <p className="text-secondary mb-3 flex-grow-1">{post.excerpt}</p>
+                  <TagList tags={post.tags} />
+                  <div className="mt-3">
+                    <Link to={`/lab/${post.slug}`} className="btn btn-outline-dark btn-sm">
+                      Read post
+                    </Link>
+                  </div>
                 </div>
               </article>
             </div>
