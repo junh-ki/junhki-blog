@@ -4,8 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Junhyung Ki</title>
-  <script type="module" crossorigin src="./assets/index-B28p4Tow.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-ColXqGrY.css">
+  <script>
+    (function () {
+      const p = new URLSearchParams(window.location.search).get('p');
+      if (p) {
+        window.history.replaceState(null, '', decodeURIComponent(p));
+      }
+    })();
+  </script>
+  <script type="module" crossorigin src="/assets/index-CIJXanWh.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-ColXqGrY.css">
 </head>
 <body>
   <div id="root"></div>
