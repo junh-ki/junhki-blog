@@ -16,6 +16,19 @@ export const Tag: Record<string, TagModel> = {
   REACT: { key: 'React', color: 'darkred' },
   VUE: { key: 'VUE', color: 'crimson' },
   SPRING: { key: 'Spring Boot', color: 'firebrick' },
-  DJANGO: { key: 'Django', color: 'darkgreen' }
+  DJANGO: { key: 'Django', color: 'darkgreen' },
+  FASTAPI: { key: 'FastAPI', color: 'teal' },
+  REDIS: { key: 'Redis', color: 'crimson' },
+  POSTGRESQL: { key: 'PostgreSQL', color: 'steelblue' },
+  FLYWAY: { key: 'Flyway', color: 'darkorange' },
+  DOCKER: { key: 'Docker', color: 'dodgerblue' },
+  SPRING_AI: { key: 'Spring AI', color: 'forestgreen' },
+  LANGFUSE: { key: 'Langfuse', color: 'purple' },
+  SQLALCHEMY: { key: 'SQLAlchemy', color: 'darkslategray' },
+  ALEMBIC: { key: 'Alembic', color: 'slategray' },
+  QUARKUS: { key: 'Quarkus', color: 'darkblue' },
+  INFLUXDB: { key: 'InfluxDB', color: 'blueviolet' },
+  GRAFANA: { key: 'Grafana', color: 'darkorange' },
+  OPENAPI: { key: 'OpenAPI', color: 'darkgreen' },
 };
 

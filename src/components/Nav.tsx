@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { JSX } from "react";
 
 export default function Nav(): JSX.Element {
   return (
@@ -23,10 +24,10 @@ export default function Nav(): JSX.Element {
           </li>
           <li className="nav-item">
             <NavLink
-              to="/blog"
+              to="/lab"
               className={({ isActive }): string => (isActive ? 'nav-link nav-link-active' : 'nav-link nav-link-idle')}
             >
-              Blog
+              Lab &amp; Notes
             </NavLink>
           </li>
           <li className="nav-item">

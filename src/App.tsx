@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { JSX, useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Nav from './components/Nav';
-import BlogPage from './pages/BlogPage';
 import ContactPage from './pages/ContactPage';
 import HomePage from './pages/HomePage';
+import LabPage from './pages/LabPage';
+import LabPostPage from './pages/LabPostPage';
 import PortfolioPage from './pages/PortfolioPage';
 
 export default function App(): JSX.Element {
@@ -34,11 +35,11 @@ export default function App(): JSX.Element {
         <Route path="/" element={<Navigate to="/home" replace />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/portfolio" element={<PortfolioPage />} />
-        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/lab" element={<LabPage />} />
+        <Route path="/lab/:slug" element={<LabPostPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="*" element={<Navigate to="/home" replace />} />
       </Routes>
     </div>
   );
 }
-

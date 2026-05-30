@@ -10,7 +10,7 @@ export default function PortfolioPage(): JSX.Element {
       <section className="cv-section shadow-sm border rounded-3 p-4 p-md-5 mb-4">
         <h2 className="mb-2">Professional Summary</h2>
         <p className="text-secondary mb-0">
-          Software engineer with 5+ years of experience delivering backend and full-stack systems across insurance, travel, automotive, and startup environments. Strong focus on Java backend systems (Quarkus and Spring Boot), multi-tenant cloud-native architecture, and long-term maintainability through clean engineering practices. Experienced with PostgreSQL/jOOQ data access and React/TypeScript frontend delivery.
+          Software engineer with 6+ years of experience delivering backend and full-stack systems across insurance, travel, automotive, and startup environments. Deep background in Java (Quarkus and Spring Boot) for multi-tenant, cloud-native systems; more recently building async REST APIs with Python and FastAPI. Experienced with PostgreSQL/jOOQ data access, React/TypeScript frontend delivery, and production-grade engineering practices.
         </p>
       </section>
 
@@ -51,7 +51,7 @@ export default function PortfolioPage(): JSX.Element {
           <div className="col-md-6 col-lg-3">
             <div className="cv-skill-card">
               <h6>Backend</h6>
-              <p className="text-secondary mb-0">Java, Spring Boot, Quarkus, jOOQ, Flyway, Kafka, JobRunr, Maven/Gradle</p>
+              <p className="text-secondary mb-0">Java, Spring Boot, Quarkus, Python, FastAPI, jOOQ, Flyway, Kafka, Maven/Gradle</p>
             </div>
           </div>
           <div className="col-md-6 col-lg-3">
