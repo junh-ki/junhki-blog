@@ -68,14 +68,16 @@ export const labPosts: LabPost[] = [
     slug: 'meeting-scheduler',
     title: 'Calendar Mechanics: Building a Meeting Scheduler API',
     publishedAt: '2026-04-01',
-    readTime: '8 min read',
+    readTime: '10 min read',
     excerpt:
-      'Exploring the data modeling challenges of a real scheduling API: timeslot auto-merge, slot splitting on booking, and race-safe concurrent writes.',
-    tags: ['Java', 'Spring Boot', 'PostgreSQL', 'Flyway', 'Docker', 'Spring Data JPA', 'MapStruct', 'OpenAPI'],
+      'A scheduling API with timeslot auto-merge, slot splitting on booking, race-safe concurrent writes, and async at-least-once notification delivery via the Transactional Outbox Pattern.',
+    tags: ['Java', 'Spring Boot', 'PostgreSQL', 'Redis', 'Docker', 'Flyway', 'OpenFeign', 'Resilience4j', 'Spring Data JPA', 'MapStruct', 'OpenAPI'],
     githubUrl: 'https://github.com/junh-ki/meeting-scheduler',
+    cardImageUrl: '/assets/projects/meeting-scheduler-arch.png',
+    cardImageAlt: 'Meeting Scheduler architecture diagram',
     content: {
       intro:
-        'I wanted to build a scheduling API that goes beyond thin CRUD. One that models calendar reality: contiguous availability, automatic merge when adjacent slots are published, clean slot restoration when a meeting is cancelled, and safety under concurrent writes. The result is a Spring Boot REST API backed by PostgreSQL, with Flyway migrations and a layered domain design.',
+        'I wanted to build a scheduling API that goes beyond thin CRUD. One that models calendar reality: contiguous availability, automatic merge when adjacent slots are published, clean slot restoration when a meeting is cancelled, and safety under concurrent writes. On top of that, meeting events trigger async notifications delivered with at-least-once guarantees using the Transactional Outbox Pattern. The result is a Spring Boot REST API backed by PostgreSQL and Redis, with Flyway migrations and a layered domain design.',
       sections: [
         {
           heading: 'Data Model: A Calendar Is Just a Collection of Timeslots',
@@ -86,12 +88,18 @@ export const labPosts: LabPost[] = [
           body: 'Two non-trivial behaviours drive the calendar mechanics.\n\nMerge on creation: when a new FREE slot is adjacent to or overlaps an existing FREE slot for the same user, they are automatically merged into one. This keeps the calendar contiguous. A single row represents a block of free time rather than a fragmented list of adjacent entries.\n\nSplit on booking: when a meeting is booked, each participant\'s covering FREE slot is split into up to three pieces: a FREE left remainder, a BOOKED slot for the exact meeting range, and a FREE right remainder. Meeting deletion reverses this: the BOOKED slot is restored to FREE and the same merge logic runs, returning each calendar to exactly the contiguous state it was in before the meeting was booked.',
         },
         {
+          heading: 'Async Notification Delivery',
+          body: 'When a meeting is created or deleted, a PENDING notification row is written to the database in the same transaction as the business operation. This ensures the intent to notify is never lost even if the application crashes immediately after commit. After the transaction commits, the service makes a best-effort enqueue into a Redis sorted set so consumers can process the notification right away.\n\nScheduled producers run every 10 seconds and re-enqueue any rows still in PENDING state, acting as a recovery net for Redis outages or missed fast-path enqueues. Consumers process each notification concurrently via a thread pool and mark it COMPLETED on success, or FAILED with the error message if the Feign call fails after Resilience4j retries (up to 3 attempts, exponential backoff). A FakeNotificationService stands in for the real downstream endpoint, making the full delivery flow testable locally without external dependencies.',
+          imageUrl: '/assets/projects/meeting-scheduler-arch.png',
+          imageAlt: 'Meeting Scheduler transactional outbox architecture diagram',
+        },
+        {
           heading: 'Concurrency Design',
-          body: 'Two layers protect against concurrent slot writes for the same user. First, a pessimistic write lock (SELECT FOR UPDATE) is taken on the user row at timeslot creation time, serialising all slot writes per user so the overlap check is race-free. Second, UNIQUE constraints on (owner_id, start_time, end_time) in timeslot and (organizer_id, start_time, end_time) in meeting serve as a last-resort safety net for any request that slips through the application-level check.\n\nIndexes on timeslot(owner_id, start_time, end_time) and timeslot(owner_id, status) keep availability queries fast regardless of total row count.',
+          body: 'Two layers protect against concurrent slot writes for the same user. First, a pessimistic write lock (SELECT FOR UPDATE) is taken on the user row at timeslot creation time, serialising all slot writes per user so the overlap check is race-free. Second, UNIQUE constraints on (owner_id, start_time, end_time) in timeslot and (organizer_id, start_time, end_time) in meeting serve as a last-resort safety net for any request that slips through the application-level check.\n\nIndexes on timeslot(owner_id, start_time, end_time) and timeslot(owner_id, status) keep availability queries fast regardless of total row count. Duplicate meeting detection runs before the N+1 timeslot availability checks, so conflicting requests fail fast without unnecessary database work.',
         },
         {
           heading: 'Tech Stack',
-          body: 'Java 21 · Spring Boot 4 · Spring Data JPA · PostgreSQL · Flyway · MapStruct · Lombok · springdoc-openapi · Docker',
+          body: 'Java 21 · Spring Boot 4 · Spring Data JPA · PostgreSQL · Flyway · Redis · Spring Data Redis · OpenFeign · Resilience4j · MapStruct · Lombok · springdoc-openapi · Docker',
         },
       ],
     },
