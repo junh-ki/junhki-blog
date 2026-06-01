@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#161b22"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#58a6ff"/>
+      <stop offset="100%" style="stop-color:#3fb950"/>
+    </linearGradient>
+    <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1.2" fill="#21262d"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+
+  <!-- Top accent bar -->
+  <rect x="0" y="0" width="1200" height="5" fill="url(#accent)" rx="0"/>
+
+  <!-- Right decorative code panel -->
+  <rect x="700" y="0" width="500" height="630" fill="#161b22" opacity="0.6"/>
+  <line x1="700" y1="0" x2="700" y2="630" stroke="#21262d" stroke-width="1"/>
+
+  <!-- Code decoration (right panel) -->
+  <text x="730" y="70"  font-family="'Courier New', Courier, monospace" font-size="16" fill="#3fb950" opacity="0.75">// junhyung ki · portfolio</text>
+  <text x="730" y="110" font-family="'Courier New', Courier, monospace" font-size="16" fill="#8b949e" opacity="0.65">const engineer = {</text>
+  <text x="730" y="140" font-family="'Courier New', Courier, monospace" font-size="16" fill="#8b949e" opacity="0.65">  focus: <tspan fill="#a5d6ff">'Backend &amp; Cloud'</tspan>,</text>
+  <text x="730" y="170" font-family="'Courier New', Courier, monospace" font-size="16" fill="#8b949e" opacity="0.65">  stack: [</text>
+  <text x="730" y="200" font-family="'Courier New', Courier, monospace" font-size="16" fill="#8b949e" opacity="0.65">    <tspan fill="#a5d6ff">'Java'</tspan>, <tspan fill="#a5d6ff">'Spring Boot'</tspan>,</text>
+  <text x="730" y="230" font-family="'Courier New', Courier, monospace" font-size="16" fill="#8b949e" opacity="0.65">    <tspan fill="#a5d6ff">'Quarkus'</tspan>, <tspan fill="#a5d6ff">'Python'</tspan>,</text>
+  <text x="730" y="260" font-family="'Courier New', Courier, monospace" font-size="16" fill="#8b949e" opacity="0.65">    <tspan fill="#a5d6ff">'React'</tspan>, <tspan fill="#a5d6ff">'TypeScript'</tspan>,</text>
+  <text x="730" y="290" font-family="'Courier New', Courier, monospace" font-size="16" fill="#8b949e" opacity="0.65">    <tspan fill="#a5d6ff">'Docker'</tspan>, <tspan fill="#a5d6ff">'Kubernetes'</tspan>,</text>
+  <text x="730" y="320" font-family="'Courier New', Courier, monospace" font-size="16" fill="#8b949e" opacity="0.65">    <tspan fill="#a5d6ff">'AWS'</tspan>, <tspan fill="#a5d6ff">'PostgreSQL'</tspan></text>
+  <text x="730" y="350" font-family="'Courier New', Courier, monospace" font-size="16" fill="#8b949e" opacity="0.65">  ],</text>
+  <text x="730" y="380" font-family="'Courier New', Courier, monospace" font-size="16" fill="#8b949e" opacity="0.65">  experience: <tspan fill="#a5d6ff">'6+ years'</tspan>,</text>
+  <text x="730" y="410" font-family="'Courier New', Courier, monospace" font-size="16" fill="#8b949e" opacity="0.65">  location: <tspan fill="#a5d6ff">'Berlin, DE'</tspan></text>
+  <text x="730" y="440" font-family="'Courier New', Courier, monospace" font-size="16" fill="#8b949e" opacity="0.65">};</text>
+
+  <!-- Left accent bar -->
+  <rect x="80" y="190" width="5" height="250" fill="url(#accent)" rx="2"/>
+
+  <!-- Role label -->
+  <text x="108" y="228" font-family="'Courier New', Courier, monospace" font-size="18" fill="#3fb950" letter-spacing="1">Software Engineer</text>
+
+  <!-- Name -->
+  <text x="104" y="328" font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, sans-serif" font-size="82" font-weight="800" fill="#f0f6fc" letter-spacing="-3">Junhyung Ki</text>
+
+  <!-- Specialisation -->
+  <text x="108" y="385" font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, sans-serif" font-size="26" fill="#8b949e">Backend · Cloud · Frontend</text>
+
+  <!-- Location -->
+  <text x="108" y="425" font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, sans-serif" font-size="22" fill="#58a6ff">Berlin, Germany</text>
+
+  <!-- Domain -->
+  <text x="108" y="565" font-family="'Courier New', Courier, monospace" font-size="20" fill="#484f58">www.junhki.de</text>
+</svg>
