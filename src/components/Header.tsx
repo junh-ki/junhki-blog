@@ -11,7 +11,7 @@ export default function Header({ isDarkTheme, onToggleTheme }: HeaderProps): JSX
       <div className="container py-4 position-relative">
         <div className="text-center">
           <h1 className="display-5 fw-bold mb-1">Junhyung Ki</h1>
-          <p className="text-secondary mb-0">Software Engineer</p>
+          <p className="text-secondary mb-0">Software Engineer · 📍 Berlin</p>
         </div>
       </div>
       <div className="social-links">
