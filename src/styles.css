@@ -297,12 +297,32 @@ body.light-theme a:hover {
 }
 
 .site-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
   background: linear-gradient(180deg, #090d18 0%, #0b1020 100%);
   border-top: 1px solid #1f2937;
 }
 
 .footer-link:hover {
   color: #e2e8f0 !important;
+}
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  background: #090d18;
+}
+
+body.light-theme .site-nav {
+  background: #f8fafc;
+}
+
+main {
+  padding-bottom: 60px;
 }
 
 body.light-theme .site-footer {

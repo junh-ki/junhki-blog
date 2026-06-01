@@ -3,7 +3,7 @@ import { JSX } from 'react';
 export default function Footer(): JSX.Element {
   const year = new Date().getFullYear();
   return (
-    <footer className="site-footer mt-4">
+    <footer className="site-footer">
       <div className="container d-flex align-items-center justify-content-between flex-wrap gap-2 py-3">
         <small className="text-secondary">© {year} Junhyung Ki</small>
         <div className="d-flex gap-3">

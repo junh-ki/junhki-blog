@@ -3,7 +3,7 @@ import { JSX } from "react";
 
 export default function Nav(): JSX.Element {
   return (
-    <nav className="navbar-expand-md border-bottom mb-3">
+    <nav className="site-nav navbar-expand-md border-bottom mb-3">
       <div className="container">
         <ul className="nav justify-content-center">
           <li className="nav-item">
