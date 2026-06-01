@@ -296,6 +296,20 @@ body.light-theme a:hover {
   color: #1d4ed8;
 }
 
+.site-footer {
+  background: linear-gradient(180deg, #090d18 0%, #0b1020 100%);
+  border-top: 1px solid #1f2937;
+}
+
+.footer-link:hover {
+  color: #e2e8f0 !important;
+}
+
+body.light-theme .site-footer {
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  border-top-color: #e5e7eb;
+}
+
 @media (max-width: 767px) {
   .social-links {
     position: static;

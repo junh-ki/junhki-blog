@@ -1,5 +1,6 @@
 import { JSX, useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import Footer from './components/Footer';
 import Header from './components/Header';
 import Nav from './components/Nav';
 import ContactPage from './pages/ContactPage';
@@ -25,21 +26,24 @@ export default function App(): JSX.Element {
   }, [isDarkTheme]);
 
   return (
-    <div className="shadow-sm">
+    <div className="shadow-sm d-flex flex-column min-vh-100">
       <Header
         isDarkTheme={isDarkTheme}
         onToggleTheme={() => setIsDarkTheme((previousIsDarkTheme: boolean): boolean => !previousIsDarkTheme)}
       />
       <Nav />
-      <Routes>
-        <Route path="/" element={<Navigate to="/home" replace />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/portfolio" element={<PortfolioPage />} />
-        <Route path="/lab" element={<LabPage />} />
-        <Route path="/lab/:slug" element={<LabPostPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="*" element={<Navigate to="/home" replace />} />
-      </Routes>
+      <main className="flex-grow-1">
+        <Routes>
+          <Route path="/" element={<Navigate to="/home" replace />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/portfolio" element={<PortfolioPage />} />
+          <Route path="/lab" element={<LabPage />} />
+          <Route path="/lab/:slug" element={<LabPostPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="*" element={<Navigate to="/home" replace />} />
+        </Routes>
+      </main>
+      <Footer />
     </div>
   );
 }
