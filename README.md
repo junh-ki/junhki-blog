@@ -15,13 +15,7 @@ The build artifacts will be written to `docs/` (the GitHub Pages deployment fold
 Note: routing uses `HashRouter`, so client routes are under `#/home`, `#/portfolio`, `#/blog`, `#/contact`.
 
 ## TODO
-1. Link Preview (a.k.a, Rich Preview): Thumbnail Image, Title, Description 
-2. Blog Component (/w Date Timestamp)
-3. Article Component (/w Date Timestamp)
-4. Header Theme (e.g., picture)
-5. Footer (e.g., © Copyright 2025, Firstname Lastname Revision *githash*. / Theme)
-6. Internationalization (i18n)
-7. Theme Switcher (Light or Dark)
-8. OSM for Travel Blogs
-9. Comment feature (/w Dynamic Page Hydration powered by Go Backend)
-10. Spring Boot LLM Integration
+1. Internationalization (i18n)
+2. OSM for Travel Blogs
+3. Comment feature (/w Dynamic Page Hydration powered by Go Backend)
+4. Spring AI Integration
