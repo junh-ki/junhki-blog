@@ -29,7 +29,7 @@ export type LabPost = {
   };
 };
 
-export const labPosts: LabPost[] = [
+export const labPosts: LabPost[] = ([
   {
     slug: 'jpa-benchmark',
     title: 'JPA Query Approaches: Method Name vs @Query vs Specification vs EntityManager',
@@ -242,4 +242,4 @@ export const labPosts: LabPost[] = [
       ],
     },
   },
-];
+] as LabPost[]).sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
