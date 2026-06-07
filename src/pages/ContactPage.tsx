@@ -38,18 +38,6 @@ export default function ContactPage(): JSX.Element {
             <small className="text-secondary">Code samples and project repositories</small>
           </div>
         </a>
-        <a
-          href="https://gravatar.com/junhki"
-          target="_blank"
-          rel="noreferrer"
-          className="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3"
-        >
-          <img src="/assets/logo/gravatar.svg" width={32} height={32} className="rounded-circle flex-shrink-0 me-5" alt="Gravatar" />
-          <div>
-            <h5 className="mb-0">Gravatar</h5>
-            <small className="text-secondary">Public profile and identity references</small>
-          </div>
-        </a>
       </div>
     </div>
   );

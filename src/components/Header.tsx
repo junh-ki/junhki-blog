@@ -24,9 +24,6 @@ export default function Header({ isDarkTheme, onToggleTheme }: HeaderProps): JSX
         <a href="https://github.com/junh-ki" target="_blank" rel="noreferrer">
           <img src="/assets/logo/github.svg" width={24} height={24} className="rounded-circle me-2" alt="GitHub" />
         </a>
-        <a href="https://gravatar.com/junhki" target="_blank" rel="noreferrer">
-          <img src="/assets/logo/gravatar.svg" width={24} height={24} className="rounded-circle me-2" alt="Gravatar" />
-        </a>
       </div>
     </div>
   );
