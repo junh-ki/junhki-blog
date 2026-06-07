@@ -88,7 +88,7 @@ export default function HomePage(): JSX.Element {
                 )}
                 <div className="p-3 d-flex flex-column flex-grow-1">
                   <small className="text-secondary d-block mb-2">
-                    {new Date(post.publishedAt).toLocaleDateString()} · {post.readTime}
+                    {post.publishedAt} · {post.readTime}
                   </small>
                   <h5 className="mb-2">{post.title}</h5>
                   <p className="text-secondary mb-3 flex-grow-1">{post.excerpt}</p>

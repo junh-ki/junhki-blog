@@ -1,6 +1,6 @@
 import { JSX, useEffect } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
-import { labPosts, type LabPost, type LabSection } from '../data/labPosts';
+import { labPosts, type LabPost, type LabSection, type LabTable } from '../data/labPosts';
 import TagList from '../components/TagList';
 
 function SectionBody({ body }: { body: string }): JSX.Element {
@@ -13,6 +13,31 @@ function SectionBody({ body }: { body: string }): JSX.Element {
         </p>
       ))}
     </>
+  );
+}
+
+function SectionTable({ table }: { table: LabTable }): JSX.Element {
+  return (
+    <div className="table-responsive mt-3 mb-2">
+      <table className="table table-bordered table-sm small">
+        <thead className="table-light">
+          <tr>
+            {table.headers.map((h) => (
+              <th key={h}>{h}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {table.rows.map((row, i) => (
+            <tr key={i}>
+              {row.map((cell, j) => (
+                <td key={j}>{cell}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
@@ -41,7 +66,7 @@ export default function LabPostPage(): JSX.Element {
       <div className="shadow-sm border rounded-3 p-4 p-md-5 bg-white mb-4">
         <div className="mb-3">
           <small className="text-secondary">
-            {new Date(post.publishedAt).toLocaleDateString()} · {post.readTime}
+            {post.publishedAt} · {post.readTime}
           </small>
         </div>
         <h2 className="mb-3">{post.title}</h2>
@@ -55,6 +80,7 @@ export default function LabPostPage(): JSX.Element {
           <div key={section.heading} className="mb-4">
             <h5 className="mb-2">{section.heading}</h5>
             <SectionBody body={section.body} />
+            {section.table && <SectionTable table={section.table} />}
             {section.imageUrl && (
               <div className="mt-3">
                 <img

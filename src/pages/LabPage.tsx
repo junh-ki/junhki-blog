@@ -40,7 +40,7 @@ export default function LabPage(): JSX.Element {
               </Link>
               <div className="p-3 d-flex flex-column flex-grow-1">
               <div className="d-flex justify-content-between align-items-center mb-2">
-                <small className="text-secondary">{new Date(post.publishedAt).toLocaleDateString()}</small>
+                <small className="text-secondary">{post.publishedAt}</small>
                 <small className="text-secondary">{post.readTime}</small>
               </div>
               <h5 className="mb-2">

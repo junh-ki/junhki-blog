@@ -1,6 +1,12 @@
+export type LabTable = {
+  headers: string[];
+  rows: string[][];
+};
+
 export type LabSection = {
   heading: string;
   body: string;
+  table?: LabTable;
   imageUrl?: string;
   imageAlt?: string;
 };
@@ -25,9 +31,67 @@ export type LabPost = {
 
 export const labPosts: LabPost[] = [
   {
+    slug: 'jpa-benchmark',
+    title: 'JPA Query Approaches: Method Name vs @Query vs Specification vs EntityManager',
+    publishedAt: 'June 07, 2026',
+    readTime: '12 min read',
+    excerpt:
+      'Spring Data JPA gives you four ways to query a database. This project runs all four against the same optional-filter problem, benchmarks them under load, and explains the proxy chain that determines who wins.',
+    tags: ['Java', 'Spring Boot', 'Spring Data JPA', 'Hibernate', 'HikariCP', 'PostgreSQL', 'Flyway', 'MapStruct', 'k6', 'Docker'],
+    githubUrl: 'https://github.com/junh-ki/jpa-benchmark',
+    cardImageUrl: '/assets/projects/jpa-benchmark-arch.png',
+    cardImageAlt: 'Spring Data JPA proxy chain diagram',
+    content: {
+      intro:
+        'Spring Data JPA offers four distinct ways to query a database, and most tutorials stop at the first one that works. This project takes all four approaches, runs them against the same problem, and measures what actually happens under load. The question driving it: when you call a Spring Data repository method, what exactly fires? And does the answer change when your query has optional filters?',
+      sections: [
+        {
+          heading: 'The Problem: Optional Filters',
+          body: 'All four approaches solve the same query: search product records with up to three optional filters.\n\ncategory, maxPrice, and inStock can each be omitted independently. That "any param might be null" constraint is where the approaches diverge and where the interesting trade-offs appear. The data model is a single product table seeded with 25 rows across five categories: Electronics, Sports, Clothing, Books, Food.\n\nThe same endpoint shape, the same SQL result, but four different paths to get there. Choosing the wrong one for the wrong reason is one of the more common Spring Data pitfalls.',
+        },
+        {
+          heading: 'How Spring Data JPA Routes Every Query',
+          body: 'Before looking at individual approaches, it helps to understand what Spring Data is actually doing when you declare a repository interface.\n\nYou never write an implementation of ProductRepository. You declare an interface, and at startup Spring Data generates one using a JDK dynamic proxy. That proxy wraps SimpleJpaRepository, which is Spring Data\'s concrete implementation of JpaRepository.\n\nEvery call to a Spring Data repository method goes through this proxy chain: your interface call -> Spring Data proxy -> SimpleJpaRepository -> EntityManager -> Hibernate -> HikariCP -> PostgreSQL.\n\nAll four approaches reach EntityManager -- it is the single execution point for every JPA query. The approaches only differ in how much work is done before they get there and which layers are traversed. That difference is exactly what shows up in the benchmark numbers.',
+          table: {
+            headers: ['Approach', 'Hibernate', 'EntityManager', 'Spring Data Proxy', 'SimpleJpaRepository', 'Summary'],
+            rows: [
+              ['Method Name', 'yes', 'yes', 'yes', 'yes', 'Zero boilerplate for simple queries but requires up to 2^N methods when filters are optional.'],
+              ['@Query JPQL', 'yes', 'yes', 'yes', 'yes', 'Single method handles all filter combinations but sends a fixed SQL shape regardless of which params are null.'],
+              ['Specification', 'yes', 'yes', 'yes', 'yes', 'Precisely shaped SQL with composable and testable predicates but pays the SimpleJpaRepository overhead on every call.'],
+              ['EntityManager', 'yes', 'yes', 'yes', 'no', 'Direct Criteria API with no SimpleJpaRepository overhead but verbose and loses Spring Data conveniences.'],
+            ],
+          },
+          imageUrl: '/assets/projects/jpa-benchmark-arch.png',
+          imageAlt: 'Spring Data JPA proxy chain for all four query approaches',
+        },
+        {
+          heading: 'Four Approaches to the Same Query',
+          body: 'Method name derivation has Spring Data parse the method name at startup and generate a query from it. No SQL, no JPQL, no manual predicate construction. For three optional filters that means 2^3 = 8 method variants plus service branching logic to call the right one. The query is pre-compiled at startup so runtime cost is just parameter binding. Best for simple, fixed queries.\n\n@Query (JPQL) uses a single annotated JPQL string with IS NULL OR conditions so all three filters are optional without branching. One method, one query, handles all combinations. The trade-off: the query planner always sees all three conditions regardless of how many are actually active, so it cannot build a filter-specific execution plan.\n\nSpecification wraps the JPA Criteria API in composable predicates. Only non-null filters produce predicates, so the SQL sent to PostgreSQL contains exactly the conditions that are active. Each predicate is independently unit-testable and reusable. The cost: every findAll(Specification) call routes through SimpleJpaRepository, which creates a CriteriaBuilder and CriteriaQuery internally before delegating to Hibernate.\n\nEntityManager exposes the layer that Specification and Spring Data delegate to internally. The Criteria API logic lives in a custom repository fragment (ProductRepositoryCustomImpl). No SimpleJpaRepository overhead, no Specification wrapper, direct Hibernate execution. The SQL shape is precisely tailored like Specification but without the proxy layer. Verbose -- the same four lines with Specification is twelve lines here -- but the thinnest possible path from service call to SQL.',
+        },
+        {
+          heading: 'Benchmark Results: What Actually Happened',
+          body: 'The k6 load test runs each approach as an independent scenario after a shared warmup phase (10 VUs, 20s per scenario, filters: category=Electronics&inStock=true).\n\nMethod name beating EntityManager is the surprising result. Both produce equivalent SQL. The difference is Java overhead per call: method name does none at runtime (query pre-compiled at startup, cost is just parameter binding), while EntityManager allocates a CriteriaBuilder, CriteriaQuery, Root, and List<Predicate> on every single invocation. That object construction accumulates across thousands of requests.\n\nSpecification being slowest follows directly from the proxy chain. Every findAll(Specification) call goes through SimpleJpaRepository, which runs its own CriteriaBuilder + CriteriaQuery setup before calling spec.toPredicate(). EntityManager skips that layer entirely.\n\nThe sequential /benchmark endpoint tells a different story: method name appears 4x slower than entityManager because it always runs first on a cold JVM. The k6 test with independent warmup-corrected scenarios cuts that gap to under 0.7ms. This is a useful illustration of why microbenchmarks without warmup phases are misleading.',
+          table: {
+            headers: ['Approach', 'avg', 'p90', 'p95'],
+            rows: [
+              ['methodName', '1.04ms', '1.41ms', '1.61ms'],
+              ['jpqlQuery', '1.25ms', '1.81ms', '2.03ms'],
+              ['entityManager', '1.29ms', '1.75ms', '2.06ms'],
+              ['specification', '1.70ms', '2.02ms', '2.24ms'],
+            ],
+          },
+        },
+        {
+          heading: 'Tech Stack',
+          body: 'Java 21 · Spring Boot 4.0.6 · Spring Framework 7.0.7 · Spring Data JPA · Hibernate 7.2.12 · HikariCP 7.0.2 · PostgreSQL 17 · Flyway 11 · MapStruct · k6 · Docker',
+        },
+      ],
+    },
+  },
+  {
     slug: 'stock-orders-api',
     title: 'Reliable Order Processing with the Transactional Outbox Pattern',
-    publishedAt: '2026-05-01',
+    publishedAt: 'May 27, 2026',
     readTime: '10 min read',
     excerpt:
       'Building a stock order API where every accepted order is guaranteed to eventually reach the exchange, without coupling endpoint reliability to exchange availability.',
@@ -67,7 +131,7 @@ export const labPosts: LabPost[] = [
   {
     slug: 'meeting-scheduler',
     title: 'Calendar Mechanics: Building a Meeting Scheduler API',
-    publishedAt: '2026-04-01',
+    publishedAt: 'June 04, 2026',
     readTime: '10 min read',
     excerpt:
       'A scheduling API with timeslot auto-merge, slot splitting on booking, race-safe concurrent writes, and async at-least-once notification delivery via the Transactional Outbox Pattern.',
@@ -107,7 +171,7 @@ export const labPosts: LabPost[] = [
   {
     slug: 'spring-ai-lab',
     title: 'LLM Pipelines with Spring AI and Langfuse',
-    publishedAt: '2026-03-01',
+    publishedAt: 'April 23, 2026',
     readTime: '7 min read',
     excerpt:
       'A hands-on playground for Spring AI: wiring up chat memory, RAG pipelines, tool-using agents, and full LLM observability with Langfuse tracing.',
@@ -143,7 +207,7 @@ export const labPosts: LabPost[] = [
   {
     slug: 'dias-kuksa',
     title: 'Vehicle-to-Cloud Diagnostics with Eclipse KUKSA',
-    publishedAt: '2021-06-01',
+    publishedAt: 'June 15, 2021',
     readTime: '6 min read',
     excerpt:
       'An end-to-end system connecting in-vehicle CAN bus data to cloud-based visualization for NOx emission diagnostics, published at Eclipse Foundation SAAM Mobility 2021.',
