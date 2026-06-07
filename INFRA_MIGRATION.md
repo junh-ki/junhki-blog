@@ -4,6 +4,70 @@ Transition from GoDaddy-managed DNS + GitHub Pages to a fully AWS-provisioned, m
 
 ---
 
+## Feature Roadmap
+
+The migration exists to unlock features that GitHub Pages cannot support.
+All cost estimates below are additive on top of the base infrastructure (~6 euros/month for Route 53, S3, and CloudFront).
+
+### Phase 1 features (frontend-only, free)
+
+These require no backend and can ship before or during the DNS migration.
+
+| Feature | Notes |
+|---------|-------|
+| i18n (Korean / German / English) | Already in TODO. Use `react-i18next`. |
+| Travel blog with OpenStreetMap | Already in TODO. Use Leaflet.js + OSM tiles (free). |
+| Dark/light mode | CSS variables + `localStorage`. |
+| Client-side search | [Fuse.js](https://fusejs.io) over a pre-built post index. No backend needed. |
+| RSS feed | Generate a `feed.xml` at build time via a Vite plugin. |
+| Reading time + scroll progress | Pure frontend. |
+
+### Phase 2 features (Lambda + DynamoDB, cheap)
+
+These come online once the CloudFront + Lambda backend exists.
+
+| Feature | Stack | Monthly cost |
+|---------|-------|-------------|
+| Comment system | Lambda + DynamoDB + SES (email notifications) | < 1 euro |
+| Contact form | Lambda + SES | < 1 euro |
+| Post reactions (like / useful / etc.) | Lambda + DynamoDB | < 1 euro |
+| GitHub activity feed | Lambda caches GitHub API responses in DynamoDB (avoids rate limits) | < 1 euro |
+| Page view counter | Lambda + DynamoDB | < 1 euro |
+
+### Phase 3 features (AI)
+
+**Why not Ollama?**
+
+Ollama requires a persistent server.
+The smallest EC2 instance that can run a useful model acceptably fast is a `t3.medium` (~$25-30/month on its own), which leaves almost no budget for anything else.
+On a CPU-only instance, inference is also slow enough to hurt the user experience.
+
+**Use AWS Bedrock instead.**
+Bedrock gives access to Llama 3, Mistral, and Claude on a pure pay-per-request basis with no idle cost.
+At personal blog traffic levels, inference spend realistically lands at $1-3/month.
+
+| Feature | Stack | Monthly cost |
+|---------|-------|-------------|
+| "Ask about my work" chatbot | API Gateway + Lambda + Bedrock (Llama 3 or Claude Haiku) + RAG over blog post content stored in DynamoDB | $1-3 |
+| Spring AI integration | Spring Boot on Lambda SnapStart calling Bedrock; zero cold-start penalty | included above |
+
+The chatbot context window is seeded with your blog posts and portfolio entries so it can answer questions like "what projects has Jun worked on?" or "does he have experience with Kubernetes?".
+No vector database needed at this scale; a simple keyword-filtered DynamoDB query to fetch relevant posts is sufficient.
+
+### Budget ceiling check
+
+| Category | Estimated monthly cost |
+|----------|-----------------------|
+| Base infra (Route 53 x2, S3, CloudFront) | ~6 euros |
+| Comments + contact + reactions + feed | ~2 euros |
+| AI chatbot (Bedrock, low traffic) | ~2 euros |
+| Buffer for spikes | ~3 euros |
+| **Total** | **~13 euros** |
+
+Comfortably under the 30 euro ceiling, with room to absorb traffic spikes or add more Bedrock calls without breaching the limit.
+
+---
+
 ## Repository Strategy
 
 ### Why two repos, not one
