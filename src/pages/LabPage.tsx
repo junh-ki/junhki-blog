@@ -18,7 +18,7 @@ export default function LabPage(): JSX.Element {
         {labPosts.map((post: LabPost) => (
           <div key={post.slug} className="col-lg-4 col-md-6">
             <article className="blog-card h-100 border rounded-3 bg-white shadow-sm d-flex flex-column overflow-hidden">
-              <Link to={`/lab/${post.slug}`} style={{ display: 'block', textDecoration: 'none' }}>
+              <Link to={`/lab/${post.slug}`} style={{ display: 'block', textDecoration: 'none', position: 'relative' }}>
                 {post.cardImageUrl ? (
                   <div style={{ height: '160px', overflow: 'hidden', background: '#f8f9fa' }}>
                     <img
@@ -37,6 +37,23 @@ export default function LabPage(): JSX.Element {
                     </span>
                   </div>
                 )}
+                <span
+                  style={{
+                    position: 'absolute',
+                    top: '10px',
+                    left: '10px',
+                    fontSize: '0.7rem',
+                    fontWeight: 700,
+                    letterSpacing: '0.05em',
+                    textTransform: 'uppercase',
+                    padding: '2px 8px',
+                    borderRadius: '4px',
+                    background: post.githubUrl ? '#2f9e44' : '#1971c2',
+                    color: '#fff',
+                  }}
+                >
+                  {post.githubUrl ? 'Lab' : 'Note'}
+                </span>
               </Link>
               <div className="p-3 d-flex flex-column flex-grow-1">
               <div className="d-flex justify-content-between align-items-center mb-2">

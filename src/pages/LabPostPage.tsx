@@ -64,7 +64,21 @@ export default function LabPostPage(): JSX.Element {
       </div>
 
       <div className="shadow-sm border rounded-3 p-4 p-md-5 bg-white mb-4">
-        <div className="mb-3">
+        <div className="mb-3 d-flex align-items-center gap-2">
+          <span
+            style={{
+              fontSize: '0.7rem',
+              fontWeight: 700,
+              letterSpacing: '0.05em',
+              textTransform: 'uppercase',
+              padding: '2px 8px',
+              borderRadius: '4px',
+              background: post.githubUrl ? '#2f9e44' : '#1971c2',
+              color: '#fff',
+            }}
+          >
+            {post.githubUrl ? 'Lab' : 'Note'}
+          </span>
           <small className="text-secondary">
             {post.publishedAt} · {post.readTime}
           </small>
