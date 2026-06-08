@@ -428,11 +428,11 @@ Once the dynamic stack is live:
 ## Migration Checklist
 
 ### Phase 1
-- [ ] Create Route 53 hosted zone for junhki.de
-- [ ] Create Route 53 hosted zone for junhki.com
-- [ ] Recreate existing DNS records in both zones
-- [ ] Update nameservers at GoDaddy (junhki.de, junhki.com)
-- [ ] Verify propagation with `dig NS` for both domains
+- [x] Create Route 53 hosted zone for junhki.de
+- [x] Create Route 53 hosted zone for junhki.com
+- [x] Recreate existing DNS records in both zones
+- [x] Update nameservers at GoDaddy (junhki.de, junhki.com)
+- [x] Verify propagation with `dig NS` for both domains
 
 ### Phase 2
 - [ ] Create S3 origin bucket (private, OAC)
