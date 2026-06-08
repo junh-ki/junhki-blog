@@ -97,14 +97,16 @@ export default function LabPostPage(): JSX.Element {
         <hr className="my-4" />
 
         <div className="d-flex flex-wrap gap-2">
-          <a
-            href={post.githubUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="btn btn-dark btn-sm"
-          >
-            View on GitHub
-          </a>
+          {post.githubUrl && (
+            <a
+              href={post.githubUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-dark btn-sm"
+            >
+              View on GitHub
+            </a>
+          )}
           {post.docUrl && (
             <a
               href={post.docUrl}

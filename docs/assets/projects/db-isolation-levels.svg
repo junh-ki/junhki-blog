@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="330" viewBox="0 0 800 330" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+
+  <!-- Background with border -->
+  <rect width="800" height="330" fill="white" rx="10" stroke="#dee2e6" stroke-width="1.5"/>
+
+  <!-- Title bar -->
+  <rect width="800" height="48" fill="#1e2a3a" rx="10"/>
+  <rect y="38" width="800" height="10" fill="#1e2a3a"/>
+  <text x="400" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="white" letter-spacing="0.3">Isolation Level vs Read Phenomena - SQL Standard</text>
+
+  <!-- Column header row backgrounds -->
+  <rect x="200" y="48" width="200" height="58" fill="#edf2ff"/>
+  <rect x="400" y="48" width="200" height="58" fill="#edf2ff"/>
+  <rect x="600" y="48" width="200" height="58" fill="#edf2ff"/>
+
+  <!-- Alternating row backgrounds -->
+  <rect x="0" y="106" width="800" height="56" fill="#fff5f5"/>
+  <rect x="0" y="218" width="800" height="56" fill="#f8f9fa"/>
+  <rect x="0" y="274" width="800" height="56" fill="#f0faf4"/>
+
+  <!-- Vertical grid lines -->
+  <line x1="200" y1="48" x2="200" y2="330" stroke="#dee2e6" stroke-width="1"/>
+  <line x1="400" y1="48" x2="400" y2="330" stroke="#dee2e6" stroke-width="1"/>
+  <line x1="600" y1="48" x2="600" y2="330" stroke="#dee2e6" stroke-width="1"/>
+
+  <!-- Horizontal grid lines -->
+  <line x1="0" y1="106" x2="800" y2="106" stroke="#dee2e6" stroke-width="1"/>
+  <line x1="0" y1="162" x2="800" y2="162" stroke="#dee2e6" stroke-width="1"/>
+  <line x1="0" y1="218" x2="800" y2="218" stroke="#dee2e6" stroke-width="1"/>
+  <line x1="0" y1="274" x2="800" y2="274" stroke="#dee2e6" stroke-width="1"/>
+
+  <!-- Column headers -->
+  <text x="300" y="80" text-anchor="middle" font-size="13" font-weight="700" fill="#364fc7">Dirty Read</text>
+  <text x="500" y="73" text-anchor="middle" font-size="13" font-weight="700" fill="#364fc7">Non-Repeatable</text>
+  <text x="500" y="91" text-anchor="middle" font-size="13" font-weight="700" fill="#364fc7">Read</text>
+  <text x="700" y="80" text-anchor="middle" font-size="13" font-weight="700" fill="#364fc7">Phantom Read</text>
+
+  <!-- Row label: Read Uncommitted (y=106..162, center=134) -->
+  <text x="100" y="129" text-anchor="middle" font-size="13" font-weight="700" fill="#495057">Read</text>
+  <text x="100" y="148" text-anchor="middle" font-size="13" font-weight="700" fill="#495057">Uncommitted</text>
+
+  <!-- Row label: Read Committed (y=162..218, center=190) -->
+  <text x="100" y="185" text-anchor="middle" font-size="13" font-weight="700" fill="#495057">Read</text>
+  <text x="100" y="204" text-anchor="middle" font-size="13" font-weight="700" fill="#495057">Committed</text>
+
+  <!-- Row label: Repeatable Read (y=218..274, center=246) -->
+  <text x="100" y="241" text-anchor="middle" font-size="13" font-weight="700" fill="#495057">Repeatable</text>
+  <text x="100" y="260" text-anchor="middle" font-size="13" font-weight="700" fill="#495057">Read</text>
+
+  <!-- Row label: Serializable (y=274..330, center=302) -->
+  <text x="100" y="306" text-anchor="middle" font-size="13" font-weight="700" fill="#495057">Serializable</text>
+
+  <!-- Pill dimensions: 120w x 28h, centered in 200-wide columns
+       Col centers x: 300, 500, 700  =>  pill x: 240, 440, 640
+       Row centers y: 134, 190, 246, 302  =>  pill y: 120, 176, 232, 288
+       Text y (baseline ~center+5): 139, 195, 251, 307 -->
+
+  <!-- POSSIBLE: fill=#fce8e8 stroke=#f5c6cb text=#c0392b -->
+  <!-- PREVENTED: fill=#d4edda stroke=#b2dfdb text=#155724 -->
+
+  <!-- Row 1: Read Uncommitted - ALL POSSIBLE -->
+  <rect x="240" y="120" width="120" height="28" fill="#fce8e8" stroke="#f5c6cb" stroke-width="1" rx="14"/>
+  <text x="300" y="139" text-anchor="middle" font-size="12" font-weight="600" fill="#c0392b">Possible</text>
+
+  <rect x="440" y="120" width="120" height="28" fill="#fce8e8" stroke="#f5c6cb" stroke-width="1" rx="14"/>
+  <text x="500" y="139" text-anchor="middle" font-size="12" font-weight="600" fill="#c0392b">Possible</text>
+
+  <rect x="640" y="120" width="120" height="28" fill="#fce8e8" stroke="#f5c6cb" stroke-width="1" rx="14"/>
+  <text x="700" y="139" text-anchor="middle" font-size="12" font-weight="600" fill="#c0392b">Possible</text>
+
+  <!-- Row 2: Read Committed - Dirty Prevented, others Possible -->
+  <rect x="240" y="176" width="120" height="28" fill="#d4edda" stroke="#b2dfdb" stroke-width="1" rx="14"/>
+  <text x="300" y="195" text-anchor="middle" font-size="12" font-weight="600" fill="#155724">Prevented</text>
+
+  <rect x="440" y="176" width="120" height="28" fill="#fce8e8" stroke="#f5c6cb" stroke-width="1" rx="14"/>
+  <text x="500" y="195" text-anchor="middle" font-size="12" font-weight="600" fill="#c0392b">Possible</text>
+
+  <rect x="640" y="176" width="120" height="28" fill="#fce8e8" stroke="#f5c6cb" stroke-width="1" rx="14"/>
+  <text x="700" y="195" text-anchor="middle" font-size="12" font-weight="600" fill="#c0392b">Possible</text>
+
+  <!-- Row 3: Repeatable Read - Dirty+NonRep Prevented, Phantom Possible -->
+  <rect x="240" y="232" width="120" height="28" fill="#d4edda" stroke="#b2dfdb" stroke-width="1" rx="14"/>
+  <text x="300" y="251" text-anchor="middle" font-size="12" font-weight="600" fill="#155724">Prevented</text>
+
+  <rect x="440" y="232" width="120" height="28" fill="#d4edda" stroke="#b2dfdb" stroke-width="1" rx="14"/>
+  <text x="500" y="251" text-anchor="middle" font-size="12" font-weight="600" fill="#155724">Prevented</text>
+
+  <rect x="640" y="232" width="120" height="28" fill="#fce8e8" stroke="#f5c6cb" stroke-width="1" rx="14"/>
+  <text x="700" y="251" text-anchor="middle" font-size="12" font-weight="600" fill="#c0392b">Possible *</text>
+
+  <!-- Row 4: Serializable - ALL PREVENTED -->
+  <rect x="240" y="288" width="120" height="28" fill="#d4edda" stroke="#b2dfdb" stroke-width="1" rx="14"/>
+  <text x="300" y="307" text-anchor="middle" font-size="12" font-weight="600" fill="#155724">Prevented</text>
+
+  <rect x="440" y="288" width="120" height="28" fill="#d4edda" stroke="#b2dfdb" stroke-width="1" rx="14"/>
+  <text x="500" y="307" text-anchor="middle" font-size="12" font-weight="600" fill="#155724">Prevented</text>
+
+  <rect x="640" y="288" width="120" height="28" fill="#d4edda" stroke="#b2dfdb" stroke-width="1" rx="14"/>
+  <text x="700" y="307" text-anchor="middle" font-size="12" font-weight="600" fill="#155724">Prevented</text>
+
+</svg>

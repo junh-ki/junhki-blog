@@ -54,14 +54,16 @@ export default function LabPage(): JSX.Element {
                 <Link to={`/lab/${post.slug}`} className="btn btn-outline-dark btn-sm">
                   Read post
                 </Link>
-                <a
-                  href={post.githubUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn btn-outline-secondary btn-sm"
-                >
-                  GitHub
-                </a>
+                {post.githubUrl && (
+                  <a
+                    href={post.githubUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn btn-outline-secondary btn-sm"
+                  >
+                    GitHub
+                  </a>
+                )}
               </div>
               </div>
             </article>

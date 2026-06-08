@@ -18,7 +18,7 @@ export type LabPost = {
   readTime: string;
   excerpt: string;
   tags: string[];
-  githubUrl: string;
+  githubUrl?: string;
   cardImageUrl?: string;
   cardImageAlt?: string;
   docUrl?: string;
@@ -30,6 +30,102 @@ export type LabPost = {
 };
 
 export const labPosts: LabPost[] = ([
+  {
+    slug: 'db-isolation-levels',
+    title: 'Database Isolation Levels: What Each One Actually Prevents',
+    publishedAt: 'June 08, 2026',
+    readTime: '8 min read',
+    excerpt:
+      'Four isolation levels, three read phenomena. This post maps each level to what it prevents, explains what the standard says versus what PostgreSQL actually does, and gives you a mental model for picking the right level in practice.',
+    tags: ['Database', 'PostgreSQL', 'SQL', 'Transactions', 'Concurrency'],
+    cardImageUrl: '/assets/projects/db-isolation-levels.svg',
+    cardImageAlt: 'DB isolation level vs read phenomena matrix',
+    content: {
+      intro:
+        'Isolation in relational databases is about what one transaction can see while another is in flight. The four standard isolation levels sit on a spectrum: the weaker end tolerates anomalies for throughput, the stronger end eliminates them at the cost of more contention. Understanding exactly what each level prevents, and what it does not, is what separates correct concurrent systems from ones that fail in ways that are almost impossible to reproduce.',
+      sections: [
+        {
+          heading: 'The Three Read Phenomena',
+          body: 'Dirty Read: Transaction T1 reads a row that T2 has written but not yet committed. If T2 rolls back, T1 has acted on data that never officially existed. Example: a payment processor reads an account balance that a concurrent transfer has decremented but not finalized.\n\nNon-Repeatable Read: T1 reads a row, T2 updates and commits it, T1 reads the same row again within the same transaction and gets a different value. The read is "non-repeatable" because the same query produces different results. Example: a reporting job reads a price, the price is updated by another session, the job reads it again and the total changes mid-calculation.\n\nPhantom Read: T1 runs a range query (SELECT WHERE amount > 1000), T2 inserts a row that satisfies that condition and commits, T1 runs the same range query and gets extra rows. The new row is a "phantom": it did not exist on the first read but does on the second. This is subtler than a non-repeatable read because the changed data was never directly read by T1 the first time.',
+        },
+        {
+          heading: 'The Four Isolation Levels',
+          body: 'Read Uncommitted: The weakest level. A transaction can read uncommitted changes from other transactions. All three phenomena are possible. Practically unused in most production systems because dirty reads lead to fundamentally incorrect results.\n\nRead Committed: A transaction only reads data that has been committed. Dirty reads are prevented. However, if T1 reads the same row twice, it may see a different value if T2 committed an update in between (non-repeatable read). This is PostgreSQL\'s default isolation level.\n\nRepeatable Read: Any row read by T1 will return the same value for the life of the transaction, regardless of concurrent commits. Non-repeatable reads are prevented. Phantom reads can still occur in the SQL standard definition, though PostgreSQL\'s snapshot-based implementation prevents them too (marked * below).\n\nSerializable: The strongest level. Transactions execute as if they ran serially, one after another. All three phenomena are prevented. PostgreSQL implements this via Serializable Snapshot Isolation (SSI), which also catches write skew: two transactions each reading and then writing overlapping data in a way that would be impossible if they ran serially.',
+          table: {
+            headers: ['Isolation Level', 'Dirty Read', 'Non-Repeatable Read', 'Phantom Read'],
+            rows: [
+              ['Read Uncommitted', 'Possible', 'Possible', 'Possible'],
+              ['Read Committed', 'Prevented', 'Possible', 'Possible'],
+              ['Repeatable Read', 'Prevented', 'Prevented', 'Possible *'],
+              ['Serializable', 'Prevented', 'Prevented', 'Prevented'],
+            ],
+          },
+          imageUrl: '/assets/projects/db-isolation-levels.svg',
+          imageAlt: 'Isolation level vs read phenomena matrix (SQL Standard)',
+        },
+        {
+          heading: "PostgreSQL's Actual Behaviour",
+          body: 'PostgreSQL maps all four levels to one of three actual implementations.\n\nRead Uncommitted behaves identically to Read Committed in PostgreSQL. The engine simply does not implement dirty reads, so specifying Read Uncommitted gives you Read Committed semantics. This is permitted by the SQL standard, which defines minimum guarantees, not maximum ones.\n\nRepeatable Read in PostgreSQL uses snapshot isolation: a transaction receives a consistent snapshot of the database taken at the start of its first query. Because the snapshot is fixed, no concurrent commits affect it. This incidentally prevents phantom reads as well, making PostgreSQL\'s Repeatable Read stronger than what the standard requires. The * in the table above refers to the SQL standard definition only.\n\nSerializable uses SSI. Beyond snapshot isolation, SSI tracks read/write dependencies between concurrent transactions and aborts any combination that could not have occurred serially. This catches write skew, which snapshot isolation alone does not prevent. When a serialization failure occurs, the transaction receives a 40001 error code and must be retried by the application.',
+        },
+        {
+          heading: 'Choosing the Right Level',
+          body: 'Read Committed is correct for most OLTP workloads. Individual statements see a consistent view, and the risk of non-repeatable reads is acceptable because most requests are short and single-statement.\n\nRepeatable Read is worth setting explicitly when a transaction runs multiple related reads that must stay consistent with each other: for example, computing a total across several rows and then making a decision based on that total. Any update committed between those reads at Read Committed could produce a stale computation.\n\nSerializable is the right choice for financial operations where correctness is non-negotiable and the workload can tolerate retries. The classic example: transferring between accounts, checking balances, or enforcing a global constraint across rows. It is also the correct choice whenever write skew is a real risk, such as two doctors concurrently removing themselves from an on-call schedule that must always have at least one doctor on call.\n\nThe general rule: pick the weakest level that still gives correct results for your specific query pattern. Stronger isolation increases contention and, at Serializable, introduces retry complexity. Weaker isolation risks anomalies that are hard to debug because they only appear under concurrent load.',
+        },
+      ],
+    },
+  },
+  {
+    slug: 'http-verbs',
+    title: 'HTTP Methods: Beyond GET and POST',
+    publishedAt: 'June 08, 2026',
+    readTime: '10 min read',
+    excerpt:
+      'GET, POST, PUT, and DELETE cover the basics. But PATCH, HEAD, OPTIONS, and TRACE each solve a distinct problem the common four cannot. This post covers what each verb is designed for, where each one is misused, and how safety and idempotency shape API design.',
+    tags: ['HTTP', 'REST', 'API Design', 'Web', 'Networking'],
+    content: {
+      intro:
+        'HTTP defines nine request methods, but most tutorials stop at four. GET, POST, PUT, and DELETE cover CRUD, but PATCH, HEAD, OPTIONS, and TRACE each solve distinct problems the common four cannot. Knowing what each one is designed for, and where each one is misused, changes how you design APIs.',
+      sections: [
+        {
+          heading: 'The Common Four',
+          body: 'GET retrieves a resource. It has no body and must not modify server state. Safe and idempotent.\n\nPOST submits data to create a new resource or trigger an action. Neither safe nor idempotent: calling POST /orders twice creates two orders.\n\nPUT replaces a resource entirely. Sending PUT /users/42 with a partial body replaces the whole user with whatever you sent, clearing any fields you omitted. Idempotent: the same PUT request always produces the same server state.\n\nDELETE removes a resource. Idempotent: deleting the same resource twice leaves it deleted after both calls.',
+        },
+        {
+          heading: 'PATCH: Partial Updates Done Right',
+          body: 'PATCH updates a resource partially. Only the fields you send are changed; everything else stays as-is. This is the critical difference from PUT, which replaces the whole resource.\n\nTwo formats are in common use. JSON Merge Patch (RFC 7396) sends a partial JSON object. Fields present in the patch are set; fields absent are left unchanged; fields set to null are removed. Simple and human-readable, but it cannot append to an array or express "set a field to null" because null means "remove" in this format.\n\nJSON Patch (RFC 6902) sends an array of operations: add, remove, replace, move, copy, test. More expressive but more verbose. Useful when you need precision: "append this item to the cart array" or "move this key."\n\nReal-world examples: GitHub\'s PATCH /repos/{owner}/{repo} to update just the description, Stripe\'s PATCH endpoints to update a single metadata field on a customer, or any profile edit form where the user changes only their phone number and you should not touch their address.\n\nA common mistake is treating PATCH like POST. It should be idempotent in practice even though the spec does not require it: applying the same PATCH twice to the same resource should produce the same result.',
+        },
+        {
+          heading: 'HEAD: Bandwidth-Free Metadata',
+          body: 'HEAD is identical to GET, except the server sends back only the response headers with no body. The status code, Content-Type, Content-Length, ETag, and Last-Modified headers are all returned exactly as they would be for GET.\n\nCheck before download: before fetching a 2 GB file, send HEAD to read Content-Length. If the file exceeds available disk space, skip the download entirely without transferring a single byte of the body.\n\nCache freshness check: send HEAD with an If-None-Match header containing the cached ETag. A 304 Not Modified response confirms the cached body is still valid, with no body transfer at all.\n\nExistence check: HEAD /resources/42 returns 200 or 404 without the payload. Useful in health checks, pre-flight validation, or verifying a link is still live before surfacing it to a user.\n\nCDNs and download managers use HEAD internally to probe file size and check whether range requests are supported (Accept-Ranges header) before parallelising a download into chunks.',
+        },
+        {
+          heading: 'OPTIONS: Discovery and CORS Preflight',
+          body: 'OPTIONS asks the server: "what methods and headers are allowed for this resource?" The server responds with an Allow header listing the supported methods (for example: GET, POST, PUT, DELETE, PATCH, OPTIONS) and returns no body. Useful for API discovery and for debugging which methods an endpoint supports.\n\nIn practice, OPTIONS is most visible as the CORS preflight mechanism. When a browser makes a cross-origin request with a non-simple method (anything other than GET, POST, or HEAD) or a custom header (such as Authorization or Content-Type: application/json), it first sends an automatic OPTIONS request to check whether the server will allow it.\n\nThe preflight request includes Origin, Access-Control-Request-Method, and Access-Control-Request-Headers. The server responds with Access-Control-Allow-Origin, Access-Control-Allow-Methods, and Access-Control-Allow-Headers. If the server\'s response permits the intended request, the browser proceeds with the real one. If not, the real request is blocked before it is ever sent.\n\nThis is why missing or misconfigured CORS headers produce "preflight failed" errors in the browser console: the OPTIONS exchange failed, so the actual POST or PUT never went out.',
+        },
+        {
+          heading: 'TRACE: The Diagnostic Loopback',
+          body: 'TRACE tells the server to echo back the exact request it received. The response Content-Type is message/http and the body is a verbatim copy of the incoming request line, headers, and body.\n\nThe original use case: debugging proxy chains. If a request passes through a load balancer, a WAF, and a CDN before reaching the origin, TRACE lets you see exactly what arrived at the origin: which headers were added, modified, or stripped by intermediate hops.\n\nIn modern practice, TRACE is almost universally disabled. Most intermediaries either strip it or return 405 Method Not Allowed, so it rarely reaches the origin anyway. A security vulnerability called Cross-Site Tracing (XST) was also discovered in the early 2000s: malicious JavaScript could use TRACE to read HttpOnly cookies that should be inaccessible to scripts, by inspecting the echoed request body. The vulnerability requires browser cooperation that modern browsers no longer provide, but the convention of disabling TRACE persists in web frameworks, reverse proxies, and WAF rule sets.\n\nIf you need to debug what an intermediate proxy is doing to your headers today, use a request-inspection service or check the proxy\'s access logs rather than relying on TRACE.',
+        },
+        {
+          heading: 'Safety and Idempotency Reference',
+          body: 'Safe means the method has no side effects on the server. A client can call a safe method without worrying about state changes. GET, HEAD, OPTIONS, and TRACE are safe.\n\nIdempotent means calling the method N times produces the same server state as calling it once. PUT, DELETE, GET, HEAD, OPTIONS, and TRACE are idempotent. POST and PATCH are not: two identical POST requests create two resources, and two PATCH requests may or may not be idempotent depending on the operation (setting a field is idempotent; incrementing a counter is not).\n\nCacheable means the response can be stored and reused. GET and HEAD are cacheable by default subject to response headers. POST can be cached with explicit Cache-Control or Expires headers but rarely is in practice.',
+          table: {
+            headers: ['Method', 'Safe', 'Idempotent', 'Cacheable', 'Request Body'],
+            rows: [
+              ['GET', 'Yes', 'Yes', 'Yes', 'No'],
+              ['POST', 'No', 'No', 'Conditional', 'Yes'],
+              ['PUT', 'No', 'Yes', 'No', 'Yes'],
+              ['DELETE', 'No', 'Yes', 'No', 'No'],
+              ['PATCH', 'No', 'No', 'No', 'Yes'],
+              ['HEAD', 'Yes', 'Yes', 'Yes', 'No'],
+              ['OPTIONS', 'Yes', 'Yes', 'No', 'Optional'],
+              ['TRACE', 'Yes', 'Yes', 'No', 'No'],
+            ],
+          },
+        },
+      ],
+    },
+  },
   {
     slug: 'jpa-benchmark',
     title: 'JPA Query Approaches: Method Name vs @Query vs Specification vs EntityManager',
