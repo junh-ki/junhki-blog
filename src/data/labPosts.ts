@@ -82,6 +82,8 @@ export const labPosts: LabPost[] = ([
     excerpt:
       'GET, POST, PUT, and DELETE cover the basics. But PATCH, HEAD, OPTIONS, and TRACE each solve a distinct problem the common four cannot. This post covers what each verb is designed for, where each one is misused, and how safety and idempotency shape API design.',
     tags: ['HTTP', 'REST', 'API Design', 'Web', 'Networking'],
+    cardImageUrl: '/assets/projects/http-methods.svg',
+    cardImageAlt: 'HTTP methods safety, idempotency and cacheability matrix',
     content: {
       intro:
         'HTTP defines nine request methods, but most tutorials stop at four. GET, POST, PUT, and DELETE cover CRUD, but PATCH, HEAD, OPTIONS, and TRACE each solve distinct problems the common four cannot. Knowing what each one is designed for, and where each one is misused, changes how you design APIs.',

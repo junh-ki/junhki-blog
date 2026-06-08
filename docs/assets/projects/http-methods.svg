@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="390" viewBox="0 0 800 390" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+
+  <rect width="800" height="390" fill="white" rx="10" stroke="#dee2e6" stroke-width="1.5"/>
+
+  <rect width="800" height="48" fill="#1e2a3a" rx="10"/>
+  <rect y="38" width="800" height="10" fill="#1e2a3a"/>
+  <text x="400" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="white" letter-spacing="0.3">HTTP Methods - Safety, Idempotency &amp; Cacheability</text>
+
+  <rect x="130" y="48" width="170" height="52" fill="#edf2ff"/>
+  <rect x="300" y="48" width="170" height="52" fill="#edf2ff"/>
+  <rect x="470" y="48" width="170" height="52" fill="#edf2ff"/>
+  <rect x="640" y="48" width="160" height="52" fill="#edf2ff"/>
+
+  <rect x="0" y="100" width="800" height="36" fill="#f8f9fa"/>
+  <rect x="0" y="172" width="800" height="36" fill="#f8f9fa"/>
+  <rect x="0" y="244" width="800" height="36" fill="#f8f9fa"/>
+  <rect x="0" y="316" width="800" height="36" fill="#f8f9fa"/>
+
+  <line x1="130" y1="48" x2="130" y2="390" stroke="#dee2e6" stroke-width="1"/>
+  <line x1="300" y1="48" x2="300" y2="390" stroke="#dee2e6" stroke-width="1"/>
+  <line x1="470" y1="48" x2="470" y2="390" stroke="#dee2e6" stroke-width="1"/>
+  <line x1="640" y1="48" x2="640" y2="390" stroke="#dee2e6" stroke-width="1"/>
+
+  <line x1="0" y1="100" x2="800" y2="100" stroke="#dee2e6" stroke-width="1"/>
+  <line x1="0" y1="136" x2="800" y2="136" stroke="#dee2e6" stroke-width="1"/>
+  <line x1="0" y1="172" x2="800" y2="172" stroke="#dee2e6" stroke-width="1"/>
+  <line x1="0" y1="208" x2="800" y2="208" stroke="#dee2e6" stroke-width="1"/>
+  <line x1="0" y1="244" x2="800" y2="244" stroke="#dee2e6" stroke-width="1"/>
+  <line x1="0" y1="280" x2="800" y2="280" stroke="#dee2e6" stroke-width="1"/>
+  <line x1="0" y1="316" x2="800" y2="316" stroke="#dee2e6" stroke-width="1"/>
+  <line x1="0" y1="352" x2="800" y2="352" stroke="#dee2e6" stroke-width="1"/>
+
+  <text x="215" y="78" text-anchor="middle" font-size="13" font-weight="700" fill="#364fc7">Safe</text>
+  <text x="385" y="78" text-anchor="middle" font-size="13" font-weight="700" fill="#364fc7">Idempotent</text>
+  <text x="555" y="78" text-anchor="middle" font-size="13" font-weight="700" fill="#364fc7">Cacheable</text>
+  <text x="720" y="71" text-anchor="middle" font-size="13" font-weight="700" fill="#364fc7">Request</text>
+  <text x="720" y="89" text-anchor="middle" font-size="13" font-weight="700" fill="#364fc7">Body</text>
+
+  <text x="65" y="123" text-anchor="middle" font-size="13" font-weight="700" fill="#495057">GET</text>
+  <text x="65" y="159" text-anchor="middle" font-size="13" font-weight="700" fill="#495057">POST</text>
+  <text x="65" y="195" text-anchor="middle" font-size="13" font-weight="700" fill="#495057">PUT</text>
+  <text x="65" y="231" text-anchor="middle" font-size="13" font-weight="700" fill="#495057">DELETE</text>
+  <text x="65" y="267" text-anchor="middle" font-size="13" font-weight="700" fill="#495057">PATCH</text>
+  <text x="65" y="303" text-anchor="middle" font-size="13" font-weight="700" fill="#495057">HEAD</text>
+  <text x="65" y="339" text-anchor="middle" font-size="13" font-weight="700" fill="#495057">OPTIONS</text>
+  <text x="65" y="375" text-anchor="middle" font-size="13" font-weight="700" fill="#495057">TRACE</text>
+
+  <!-- GET: Safe=Yes, Idempotent=Yes, Cacheable=Yes, Body=No -->
+  <rect x="160" y="106" width="110" height="24" fill="#d4edda" stroke="#b2dfdb" stroke-width="1" rx="12"/>
+  <text x="215" y="123" text-anchor="middle" font-size="12" font-weight="600" fill="#155724">Yes</text>
+  <rect x="330" y="106" width="110" height="24" fill="#d4edda" stroke="#b2dfdb" stroke-width="1" rx="12"/>
+  <text x="385" y="123" text-anchor="middle" font-size="12" font-weight="600" fill="#155724">Yes</text>
+  <rect x="500" y="106" width="110" height="24" fill="#d4edda" stroke="#b2dfdb" stroke-width="1" rx="12"/>
+  <text x="555" y="123" text-anchor="middle" font-size="12" font-weight="600" fill="#155724">Yes</text>
+  <rect x="665" y="106" width="110" height="24" fill="#fce8e8" stroke="#f5c6cb" stroke-width="1" rx="12"/>
+  <text x="720" y="123" text-anchor="middle" font-size="12" font-weight="600" fill="#c0392b">No</text>
+
+  <!-- POST: Safe=No, Idempotent=No, Cacheable=Conditional, Body=Yes -->
+  <rect x="160" y="142" width="110" height="24" fill="#fce8e8" stroke="#f5c6cb" stroke-width="1" rx="12"/>
+  <text x="215" y="159" text-anchor="middle" font-size="12" font-weight="600" fill="#c0392b">No</text>
+  <rect x="330" y="142" width="110" height="24" fill="#fce8e8" stroke="#f5c6cb" stroke-width="1" rx="12"/>
+  <text x="385" y="159" text-anchor="middle" font-size="12" font-weight="600" fill="#c0392b">No</text>
+  <rect x="500" y="142" width="110" height="24" fill="#fff3cd" stroke="#ffc107" stroke-width="1" rx="12"/>
+  <text x="555" y="159" text-anchor="middle" font-size="11" font-weight="600" fill="#856404">Conditional</text>
+  <rect x="665" y="142" width="110" height="24" fill="#d4edda" stroke="#b2dfdb" stroke-width="1" rx="12"/>
+  <text x="720" y="159" text-anchor="middle" font-size="12" font-weight="600" fill="#155724">Yes</text>
+
+  <!-- PUT: Safe=No, Idempotent=Yes, Cacheable=No, Body=Yes -->
+  <rect x="160" y="178" width="110" height="24" fill="#fce8e8" stroke="#f5c6cb" stroke-width="1" rx="12"/>
+  <text x="215" y="195" text-anchor="middle" font-size="12" font-weight="600" fill="#c0392b">No</text>
+  <rect x="330" y="178" width="110" height="24" fill="#d4edda" stroke="#b2dfdb" stroke-width="1" rx="12"/>
+  <text x="385" y="195" text-anchor="middle" font-size="12" font-weight="600" fill="#155724">Yes</text>
+  <rect x="500" y="178" width="110" height="24" fill="#fce8e8" stroke="#f5c6cb" stroke-width="1" rx="12"/>
+  <text x="555" y="195" text-anchor="middle" font-size="12" font-weight="600" fill="#c0392b">No</text>
+  <rect x="665" y="178" width="110" height="24" fill="#d4edda" stroke="#b2dfdb" stroke-width="1" rx="12"/>
+  <text x="720" y="195" text-anchor="middle" font-size="12" font-weight="600" fill="#155724">Yes</text>
+
+  <!-- DELETE: Safe=No, Idempotent=Yes, Cacheable=No, Body=No -->
+  <rect x="160" y="214" width="110" height="24" fill="#fce8e8" stroke="#f5c6cb" stroke-width="1" rx="12"/>
+  <text x="215" y="231" text-anchor="middle" font-size="12" font-weight="600" fill="#c0392b">No</text>
+  <rect x="330" y="214" width="110" height="24" fill="#d4edda" stroke="#b2dfdb" stroke-width="1" rx="12"/>
+  <text x="385" y="231" text-anchor="middle" font-size="12" font-weight="600" fill="#155724">Yes</text>
+  <rect x="500" y="214" width="110" height="24" fill="#fce8e8" stroke="#f5c6cb" stroke-width="1" rx="12"/>
+  <text x="555" y="231" text-anchor="middle" font-size="12" font-weight="600" fill="#c0392b">No</text>
+  <rect x="665" y="214" width="110" height="24" fill="#fce8e8" stroke="#f5c6cb" stroke-width="1" rx="12"/>
+  <text x="720" y="231" text-anchor="middle" font-size="12" font-weight="600" fill="#c0392b">No</text>
+
+  <!-- PATCH: Safe=No, Idempotent=No, Cacheable=No, Body=Yes -->
+  <rect x="160" y="250" width="110" height="24" fill="#fce8e8" stroke="#f5c6cb" stroke-width="1" rx="12"/>
+  <text x="215" y="267" text-anchor="middle" font-size="12" font-weight="600" fill="#c0392b">No</text>
+  <rect x="330" y="250" width="110" height="24" fill="#fce8e8" stroke="#f5c6cb" stroke-width="1" rx="12"/>
+  <text x="385" y="267" text-anchor="middle" font-size="12" font-weight="600" fill="#c0392b">No</text>
+  <rect x="500" y="250" width="110" height="24" fill="#fce8e8" stroke="#f5c6cb" stroke-width="1" rx="12"/>
+  <text x="555" y="267" text-anchor="middle" font-size="12" font-weight="600" fill="#c0392b">No</text>
+  <rect x="665" y="250" width="110" height="24" fill="#d4edda" stroke="#b2dfdb" stroke-width="1" rx="12"/>
+  <text x="720" y="267" text-anchor="middle" font-size="12" font-weight="600" fill="#155724">Yes</text>
+
+  <!-- HEAD: Safe=Yes, Idempotent=Yes, Cacheable=Yes, Body=No -->
+  <rect x="160" y="286" width="110" height="24" fill="#d4edda" stroke="#b2dfdb" stroke-width="1" rx="12"/>
+  <text x="215" y="303" text-anchor="middle" font-size="12" font-weight="600" fill="#155724">Yes</text>
+  <rect x="330" y="286" width="110" height="24" fill="#d4edda" stroke="#b2dfdb" stroke-width="1" rx="12"/>
+  <text x="385" y="303" text-anchor="middle" font-size="12" font-weight="600" fill="#155724">Yes</text>
+  <rect x="500" y="286" width="110" height="24" fill="#d4edda" stroke="#b2dfdb" stroke-width="1" rx="12"/>
+  <text x="555" y="303" text-anchor="middle" font-size="12" font-weight="600" fill="#155724">Yes</text>
+  <rect x="665" y="286" width="110" height="24" fill="#fce8e8" stroke="#f5c6cb" stroke-width="1" rx="12"/>
+  <text x="720" y="303" text-anchor="middle" font-size="12" font-weight="600" fill="#c0392b">No</text>
+
+  <!-- OPTIONS: Safe=Yes, Idempotent=Yes, Cacheable=No, Body=Optional -->
+  <rect x="160" y="322" width="110" height="24" fill="#d4edda" stroke="#b2dfdb" stroke-width="1" rx="12"/>
+  <text x="215" y="339" text-anchor="middle" font-size="12" font-weight="600" fill="#155724">Yes</text>
+  <rect x="330" y="322" width="110" height="24" fill="#d4edda" stroke="#b2dfdb" stroke-width="1" rx="12"/>
+  <text x="385" y="339" text-anchor="middle" font-size="12" font-weight="600" fill="#155724">Yes</text>
+  <rect x="500" y="322" width="110" height="24" fill="#fce8e8" stroke="#f5c6cb" stroke-width="1" rx="12"/>
+  <text x="555" y="339" text-anchor="middle" font-size="12" font-weight="600" fill="#c0392b">No</text>
+  <rect x="665" y="322" width="110" height="24" fill="#e9ecef" stroke="#ced4da" stroke-width="1" rx="12"/>
+  <text x="720" y="339" text-anchor="middle" font-size="12" font-weight="600" fill="#495057">Optional</text>
+
+  <!-- TRACE: Safe=Yes, Idempotent=Yes, Cacheable=No, Body=No -->
+  <rect x="160" y="358" width="110" height="24" fill="#d4edda" stroke="#b2dfdb" stroke-width="1" rx="12"/>
+  <text x="215" y="375" text-anchor="middle" font-size="12" font-weight="600" fill="#155724">Yes</text>
+  <rect x="330" y="358" width="110" height="24" fill="#d4edda" stroke="#b2dfdb" stroke-width="1" rx="12"/>
+  <text x="385" y="375" text-anchor="middle" font-size="12" font-weight="600" fill="#155724">Yes</text>
+  <rect x="500" y="358" width="110" height="24" fill="#fce8e8" stroke="#f5c6cb" stroke-width="1" rx="12"/>
+  <text x="555" y="375" text-anchor="middle" font-size="12" font-weight="600" fill="#c0392b">No</text>
+  <rect x="665" y="358" width="110" height="24" fill="#fce8e8" stroke="#f5c6cb" stroke-width="1" rx="12"/>
+  <text x="720" y="375" text-anchor="middle" font-size="12" font-weight="600" fill="#c0392b">No</text>
+
+</svg>
