@@ -51,15 +51,6 @@ export const labPosts: LabPost[] = ([
         {
           heading: 'The Four Isolation Levels',
           body: 'Read Uncommitted: The weakest level. A transaction can read uncommitted changes from other transactions. All three phenomena are possible. Practically unused in most production systems because dirty reads lead to fundamentally incorrect results.\n\nRead Committed: A transaction only reads data that has been committed. Dirty reads are prevented. However, if T1 reads the same row twice, it may see a different value if T2 committed an update in between (non-repeatable read). This is PostgreSQL\'s default isolation level.\n\nRepeatable Read: Any row read by T1 will return the same value for the life of the transaction, regardless of concurrent commits. Non-repeatable reads are prevented. Phantom reads can still occur in the SQL standard definition, though PostgreSQL\'s snapshot-based implementation prevents them too (marked * below).\n\nSerializable: The strongest level. Transactions execute as if they ran serially, one after another. All three phenomena are prevented. PostgreSQL implements this via Serializable Snapshot Isolation (SSI), which also catches write skew: two transactions each reading and then writing overlapping data in a way that would be impossible if they ran serially.',
-          table: {
-            headers: ['Isolation Level', 'Dirty Read', 'Non-Repeatable Read', 'Phantom Read'],
-            rows: [
-              ['Read Uncommitted', 'Possible', 'Possible', 'Possible'],
-              ['Read Committed', 'Prevented', 'Possible', 'Possible'],
-              ['Repeatable Read', 'Prevented', 'Prevented', 'Possible *'],
-              ['Serializable', 'Prevented', 'Prevented', 'Prevented'],
-            ],
-          },
           imageUrl: '/assets/projects/db-isolation-levels.svg',
           imageAlt: 'Isolation level vs read phenomena matrix (SQL Standard)',
         },
@@ -91,6 +82,8 @@ export const labPosts: LabPost[] = ([
         {
           heading: 'The Common Four',
           body: 'GET retrieves a resource. It has no body and must not modify server state. Safe and idempotent.\n\nPOST submits data to create a new resource or trigger an action. Neither safe nor idempotent: calling POST /orders twice creates two orders.\n\nPUT replaces a resource entirely. Sending PUT /users/42 with a partial body replaces the whole user with whatever you sent, clearing any fields you omitted. Idempotent: the same PUT request always produces the same server state.\n\nDELETE removes a resource. Idempotent: deleting the same resource twice leaves it deleted after both calls.',
+          imageUrl: '/assets/projects/http-methods.svg',
+          imageAlt: 'HTTP methods safety, idempotency and cacheability matrix',
         },
         {
           heading: 'PATCH: Partial Updates Done Right',
@@ -115,19 +108,6 @@ export const labPosts: LabPost[] = ([
         {
           heading: 'Safety and Idempotency Reference',
           body: 'Safe means the method has no side effects on the server. A client can call a safe method without worrying about state changes. GET, HEAD, OPTIONS, and TRACE are safe.\n\nIdempotent means calling the method N times produces the same server state as calling it once. PUT, DELETE, GET, HEAD, OPTIONS, and TRACE are idempotent. POST and PATCH are not: two identical POST requests create two resources, and two PATCH requests may or may not be idempotent depending on the operation (setting a field is idempotent; incrementing a counter is not).\n\nCacheable means the response can be stored and reused. GET and HEAD are cacheable by default subject to response headers. POST can be cached with explicit Cache-Control or Expires headers but rarely is in practice.',
-          table: {
-            headers: ['Method', 'Safe', 'Idempotent', 'Cacheable', 'Request Body'],
-            rows: [
-              ['GET', 'Yes', 'Yes', 'Yes', 'No'],
-              ['POST', 'No', 'No', 'Conditional', 'Yes'],
-              ['PUT', 'No', 'Yes', 'No', 'Yes'],
-              ['DELETE', 'No', 'Yes', 'No', 'No'],
-              ['PATCH', 'No', 'No', 'No', 'Yes'],
-              ['HEAD', 'Yes', 'Yes', 'Yes', 'No'],
-              ['OPTIONS', 'Yes', 'Yes', 'No', 'Optional'],
-              ['TRACE', 'Yes', 'Yes', 'No', 'No'],
-            ],
-          },
         },
       ],
     },
